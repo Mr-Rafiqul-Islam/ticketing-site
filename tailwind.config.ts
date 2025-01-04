@@ -20,6 +20,7 @@ export default {
     },
     extend: {
       colors: {
+        'primary-color': "#E0115F",
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
         card: {

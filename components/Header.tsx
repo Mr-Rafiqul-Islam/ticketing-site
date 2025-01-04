@@ -8,11 +8,10 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import Link from "next/link";
-import { Button } from "@/components/ui/button";
 
 function Header() {
   return (
-    <header className="py-5 sticky top-0 left-0 z-50 w-full bg-[#E0115F]">
+    <header className="py-5 sticky top-0 left-0 z-50 w-full bg-primary-color">
       <div className="container">
         <div className="header flex gap-4 items-center justify-between">
           <div className="logo">
@@ -60,28 +59,32 @@ function Header() {
             <div className="block md:hidden">
               <Sheet>
                 <SheetTrigger>
-                  <button className="focus:outline-none">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="h-6 w-6"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth="2"
-                        d="M4 6h16M4 12h16m-7 6h7"
-                      ></path>
-                    </svg>
-                  </button>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="h-8 w-8 text-white"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
+                      d="M4 6h16M4 12h16m-7 6h7"
+                    ></path>
+                  </svg>
                 </SheetTrigger>
                 <SheetContent>
                   <SheetHeader>
                     <SheetTitle>
-                      <div className="bg-[#E0115F] w-full mt-4">
-                        <img src="./logo-with-bg.png" alt="logo" className="mx-auto" />
+                      <div className="bg-primary-color w-full mt-4">
+                        <Link href={"/"}>
+                          <img
+                            src="./logo-with-bg.png"
+                            alt="logo"
+                            className="mx-auto"
+                          />
+                        </Link>
                       </div>
                     </SheetTitle>
                     <SheetDescription></SheetDescription>

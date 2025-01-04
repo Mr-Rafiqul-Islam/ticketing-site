@@ -7,6 +7,10 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
+/* Style the active dot */
+.custom-swiper .swiper-pagination-bullet-active {
+  @apply bg-primary-color; /* Active color */
+}
 
 @layer base {
   :root {
