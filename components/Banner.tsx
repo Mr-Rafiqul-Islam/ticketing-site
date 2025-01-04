@@ -21,22 +21,10 @@ export default function Banner() {
         className="custom-swiper"
       >
         <SwiperSlide>
-          <Image
-            src="/banner-1.jpeg"
-            alt="Banner 1"
-            width={1920}
-            height={300}
-            className="w-full h-[200px] md:h-[500px] object-cover lg:object-fill"
-          />
+          <img src="./banner-1.webp" className="w-full h-auto" alt="" />
         </SwiperSlide>
         <SwiperSlide>
-          <Image
-            src="/banner-2.jpg"
-            alt="Banner 1"
-            width={1920}
-            height={300}
-            className="w-full h-[200px] md:h-[500px] object-cover"
-          />
+          <img src="./banner_Greenline-Bus-Banner.jpg" alt="" className="w-full h-auto"/>
         </SwiperSlide>
       </Swiper>
     </section>
