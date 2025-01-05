@@ -1,11 +1,10 @@
 import React from "react";
-
 const BusCard = ({ bus }: { bus?: any }) => {
   return (
     <div className="border rounded-lg p-4 shadow-sm hover:shadow-md grid grid-cols-1 lg:grid-cols-[1fr_1.5fr_1fr] gap-3 lg:gap-4">
       <div className="flex gap-2">
         <img
-          src='./bus-logo.png'
+          src='./hanif.png'
           alt="bus logo"
           className="w-20 h-20 object-cover"
         />
