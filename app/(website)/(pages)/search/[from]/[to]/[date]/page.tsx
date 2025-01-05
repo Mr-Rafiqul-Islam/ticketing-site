@@ -9,7 +9,7 @@ interface SearchParams {
 }
 
 const SearchResultsPage = async ({ params }: SearchParams) => {
-  const { from, to, date } = params;
+//   const { from, to, date } = params;
   // const flights = await fetchFlights(from, to, date);
 
   return (
