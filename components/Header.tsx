@@ -114,6 +114,12 @@ function Header() {
                         Contact
                       </a>
                     </li>
+                    <Link
+                      href="/"
+                      className="py-3 text-center px-[40px] text-sm md:text-base xl:text-[18px] bg-slate-900 transition-all duration-300 rounded-full text-white"
+                    >
+                      Login
+                    </Link>
                   </ul>
                 </SheetContent>
               </Sheet>
