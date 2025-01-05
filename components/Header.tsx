@@ -7,7 +7,10 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
+import logo from "@/public/logo.png";
+import logobg from "@/public/logo-with-bg.png";
 import Link from "next/link";
+import Image from "next/image";
 
 function Header() {
   return (
@@ -17,7 +20,7 @@ function Header() {
           <div className="logo">
             {/* logo */}
             <Link href={"/"}>
-              <img src="./logo.png" alt="logo" width={150} height={80} />
+              <Image src={logo} alt="logo" width={150} height={80} />
             </Link>
           </div>
           <nav className="w-100 text-center hidden md:block">
@@ -79,11 +82,7 @@ function Header() {
                     <SheetTitle>
                       <div className="bg-primary-color w-full mt-4">
                         <Link href={"/"}>
-                          <img
-                            src="./logo-with-bg.png"
-                            alt="logo"
-                            className="mx-auto"
-                          />
+                          <Image src={logobg} alt="logo" width={150} height={80}  className="mx-auto"/>
                         </Link>
                       </div>
                     </SheetTitle>

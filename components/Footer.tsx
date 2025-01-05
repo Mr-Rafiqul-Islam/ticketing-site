@@ -1,5 +1,7 @@
+import Image from "next/image";
 import Link from "next/link";
 import React from "react";
+import logo from "@/public/logo.png";
 
 function Footer() {
   return (
@@ -8,7 +10,7 @@ function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 justify-between">
           <div className="footer-about">
             <Link href={"/"}>
-              <img src="./logo.png" alt="logo"/>
+              <Image src={logo} alt="logo" width={150} height={80} />
             </Link>
             <p className="text-white font-medium text-sm md:text-base mt-4">
               Touch is a bus booking platform that allows you to book your bus

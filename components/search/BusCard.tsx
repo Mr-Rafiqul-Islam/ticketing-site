@@ -2,7 +2,7 @@ import React from "react";
 
 const BusCard = ({ bus }: { bus?: any }) => {
   return (
-    <div className="border rounded-lg p-4 shadow-sm hover:shadow-md grid grid-cols-1 lg:grid-cols-3 gap-3 lg:gap-4 max-w-5xl">
+    <div className="border rounded-lg p-4 shadow-sm hover:shadow-md grid grid-cols-1 lg:grid-cols-[1fr_1.5fr_1fr] gap-3 lg:gap-4">
       <div className="flex gap-2">
         <img
           src='./bus-logo.png'
@@ -31,12 +31,12 @@ const BusCard = ({ bus }: { bus?: any }) => {
         </div>
       </div>
       <div className="flex justify-between lg:justify-end lg:gap-4 items-center p-2 bg-[#F1F1F1] lg:bg-transparent">
-        <h3 className="text-2xl font-bold text-primary-color">৳<span>1000</span></h3>
+        <h3 className="lg:text-2xl  font-bold text-primary-color">৳<span>1000</span></h3>
         <div className="flex flex-col items-center gap-1">
             <button className="bg-primary-color hover:bg-primary-color/80 transition-all duration-300 text-white px-4 py-2 rounded-md">
             Book Ticket
             </button>
-            <p className="text-gray-800"><strong>24</strong> Seat(s) Available</p>
+            <p className="text-gray-800 text-sm"><strong>24</strong> Seat(s) Available</p>
         </div>
       </div>
     </div>
