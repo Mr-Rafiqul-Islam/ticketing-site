@@ -49,8 +49,8 @@ function About() {
                   src="/apple-app-store.png"
                   alt="App Store"
                   width={200}
-                  height={70}
-                  className=""
+                  height={90}
+                  className="w-full h-[65px]"
                 />
               </Link>
             </div>
