@@ -3,7 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 
-function About() {
+function GetApp() {
   return (
     <section className="py-40">
       <div className="container">
@@ -61,4 +61,4 @@ function About() {
   );
 }
 
-export default About;
+export default GetApp;
