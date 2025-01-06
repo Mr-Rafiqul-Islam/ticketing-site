@@ -1,13 +1,11 @@
 import React from "react";
+import busImg from '@/public/hanif.png'
+import Image from "next/image";
 const BusCard = ({ bus }: { bus?: any }) => {
   return (
     <div className="border rounded-lg p-4 shadow-sm hover:shadow-md grid grid-cols-1 lg:grid-cols-[1fr_1.5fr_1fr] gap-3 lg:gap-4">
       <div className="flex gap-2">
-        <img
-          src='./hanif.png'
-          alt="bus logo"
-          className="w-20 h-20 object-cover"
-        />
+        <Image src={busImg} className="w-20 h-8 object-fit" width={100} height={10} alt="operator logo"/>
         <div className="flex flex-col gap-1">
           <h3 className="font-bold text-xs md:text-base">Hanif Enterprise</h3>
           <p className="text-gray-400 text-xs md:text-base">Hino, AK1J Super Plus Non AC</p>
