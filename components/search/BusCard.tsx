@@ -17,7 +17,7 @@ const BusCard = ({ bus }: { bus?: any }) => {
 
   const [selectedSeats, setSelectedSeats] = useState<string[]>([]);
   const [bookedSeats, setBookedSeats] = useState<string[]>(["A1", "B3"]); // add booked seats here
-  const seats = ["A1", "A2", "A3", "A4", "B1", "B2", "B3", "B4", "C1", "C2"];
+  const seats = ["A1", "A2", "A3", "A4", "B1", "B2", "B3", "B4", "C1", "C2","C3", "C4", "D1", "D2", "D3", "D4", "E1", "E2", "E3", "E4", "F1", "F2", "F3", "F4", "G1", "G2", "G3", "G4", "H1", "H2", "H3", "H4","I1","I2","I3","I4"];		
   const maxSeats = 4;
 
 const toggleSeat = (seat: string) => {
@@ -73,7 +73,7 @@ const toggleSeat = (seat: string) => {
                 Book Ticket
               </a>
             </SheetTrigger>
-            <SheetContent>
+            <SheetContent className="w-full">
               <Tabs defaultValue="seat">
                 <SheetHeader>
                   <SheetTitle className="font-gesit uppercase text-xl mb-2">
@@ -83,23 +83,23 @@ const toggleSeat = (seat: string) => {
                 <TabsList className="w-full justify-around bg-primary-color">
                   <TabsTrigger
                     value="seat"
-                    className="px-3 font-gesit text-base text-white"
+                    className="font-gesit text-xs md:text-base text-white"
                   >
-                    <PiSeatBold className="me-2" size="20" />
+                    <PiSeatBold className="me-1" size="16" />
                     Seat
                   </TabsTrigger>
                   <TabsTrigger
                     value="amneties"
-                    className="px-3 font-gesit text-base text-white"
+                    className="font-gesit text-xs md:text-base text-white"
                   >
-                    <GiStarFormation className="me-2" size="20" />
+                    <GiStarFormation className="me-1" size="16" />
                     Amneties
                   </TabsTrigger>
                   <TabsTrigger
                     value="policies"
-                    className="px-3 font-gesit text-base text-white"
+                    className="font-gesit text-xs md:text-base text-white"
                   >
-                    <IoShieldCheckmarkOutline className="me-2" size="20" />
+                    <IoShieldCheckmarkOutline className="me-1" size="16" />
                     Policies
                   </TabsTrigger>
                 </TabsList>
