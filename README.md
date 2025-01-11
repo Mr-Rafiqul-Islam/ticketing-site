@@ -8,11 +8,11 @@ npm i
 ```
 if conflict then 
 ```bash
-npm install react@18 react-dom@18
+npm install --force
 ```
 or
 ```bash
-npm install --force
+npm install react@18 react-dom@18
 ```
 2. Then, run the development server:
 
