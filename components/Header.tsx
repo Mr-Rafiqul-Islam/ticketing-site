@@ -58,7 +58,7 @@ function Header() {
           <div className="call-to-action">
             <Link
               href="/login"
-              className={cn("hidden md:block py-3 px-[40px] text-sm md:text-base xl:text-[18px] bg-slate-900 transition-all duration-300 rounded-full text-white",
+              className={cn("hidden md:block py-3 px-[40px] text-sm md:text-base xl:text-[18px] bg-slate-900 transition-all duration-300 rounded-full text-white hover:scale-105",
               user && "md:hidden")}
             >
               Login
@@ -139,7 +139,7 @@ function Header() {
                       <Link
                         href="/login"
                         className={cn(
-                          "py-3 text-center px-[40px] text-sm md:text-base xl:text-[18px] bg-slate-900 transition-all duration-300 rounded-full text-white",
+                          "py-3 text-center px-[40px] text-sm md:text-base xl:text-[18px] bg-slate-900 transition-all duration-300 rounded-full text-white hover:scale-105",
                           user && "hidden"
                         )}
                       >
