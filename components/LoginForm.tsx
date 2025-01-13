@@ -37,7 +37,7 @@ const LoginForm = () => {
                 </label>
                 <input
                   id="email"
-                  className="border p-3 shadow-md placeholder:text-base focus:scale-105 ease-in-out duration-300 border-gray-300 rounded-lg w-full"
+                  className="border p-3 shadow-md placeholder:text-base ease-in-out duration-300 outline-none border-gray-300 rounded-lg w-full"
                   type="email"
                   placeholder="Email"
                   {...register("email", { required: true })}
@@ -49,7 +49,7 @@ const LoginForm = () => {
                 </label>
                 <input
                   id="password"
-                  className="border p-3 shadow-md placeholder:text-base focus:scale-105 ease-in-out duration-300 border-gray-300 rounded-lg w-full"
+                  className="border p-3 shadow-md placeholder:text-base ease-in-out duration-300 outline-none border-gray-300 rounded-lg w-full"
                   type="password"
                   placeholder="Password"
                   {...register("password", { required: true })}
@@ -85,7 +85,7 @@ const LoginForm = () => {
                 </a>
               </h3>
             </div>
-            
+
             {/* Third Party Authentication Options */}
             <div
               id="third-party-auth"
