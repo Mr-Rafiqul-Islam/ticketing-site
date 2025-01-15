@@ -4,17 +4,18 @@ import { useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 
-interface LoginFormValues {
+interface SignUpFormValues {
+  name: string;
   email: string;
   password: string;
 }
 
-const LoginForm = () => {
+const SignUpForm = () => {
   const router = useRouter();
-  const { register, handleSubmit } = useForm<LoginFormValues>();
+  const { register, handleSubmit } = useForm<SignUpFormValues>();
   const { mutate, status, error } = useLogin();
 
-  const onSubmit = (data: LoginFormValues) => {
+  const onSubmit = (data: SignUpFormValues) => {
     mutate(data, {
       onSuccess: () => {
         router.push("/"); // Redirect to the home page on success
@@ -29,9 +30,21 @@ const LoginForm = () => {
         >
           <div className="border-[20px] border-transparent rounded-[20px] bg-white shadow-lg xl:p-10 2xl:p-10 lg:p-10 md:p-10 sm:p-2 m-2">
             <h1 className="pt-8 pb-6 font-bold text-5xl text-center cursor-default">
-              Sign in
+              Sign Up
             </h1>
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+              <div>
+                <label htmlFor="name" className="mb-2 text-lg">
+                  Full Name
+                </label>
+                <input
+                  id="name"
+                  className="border p-3 shadow-md placeholder:text-base ease-in-out duration-300 outline-none border-gray-300 rounded-lg w-full"
+                  type="text"
+                  placeholder="Name"
+                  {...register("name", { required: true })}
+                />
+              </div>
               <div>
                 <label htmlFor="email" className="mb-2 text-lg">
                   Email
@@ -56,14 +69,6 @@ const LoginForm = () => {
                   {...register("password", { required: true })}
                 />
               </div>
-              <a
-                className="group text-blue-400 transition-all duration-100 ease-in-out"
-                href="#"
-              >
-                <span className="bg-left-bottom bg-gradient-to-r text-sm from-blue-400 to-blue-400 bg-[length:0%_2px] bg-no-repeat group-hover:bg-[length:100%_2px] transition-all duration-500 ease-out">
-                  Forget your password?
-                </span>
-              </a>
               <button
                 className="bg-primary-color shadow-lg mt-6 p-2 text-white rounded-lg w-full hover:scale-105 transition duration-300 ease-in-out"
                 type="submit"
@@ -75,13 +80,13 @@ const LoginForm = () => {
             </form>
             <div className="flex flex-col mt-4 items-center justify-center text-sm">
               <h3 className="">
-                Don't have an account?{" "}
+                Already have an account?{" "}
                 <Link
                   className="group text-blue-400 transition-all duration-100 ease-in-out"
-                  href="/signup"
+                  href="/login"
                 >
                   <span className="bg-left-bottom bg-gradient-to-r from-blue-400 to-blue-400 bg-[length:0%_2px] bg-no-repeat group-hover:bg-[length:100%_2px] transition-all duration-500 ease-out">
-                    Sign Up
+                    Log In
                   </span>
                 </Link>
               </h3>
@@ -134,4 +139,4 @@ const LoginForm = () => {
   );
 };
 
-export default LoginForm;
+export default SignUpForm;
