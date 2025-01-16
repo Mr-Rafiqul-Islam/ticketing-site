@@ -142,41 +142,85 @@ function SeatBooking({
                 <div className="flex justify-around my-4">
                   <ul className="flex items-center">
                     <li className="w-[15px] h-[15px] mr-[5px] rounded-[4px] available-example bg-white border border-black"></li>
-                    <li className="text-[12px] font-normal leading-[15px] text-[#202020]">Available</li>
+                    <li className="text-[12px] font-normal leading-[15px] text-[#202020]">
+                      Available
+                    </li>
                   </ul>
                   <ul className="flex items-center">
                     <li className="w-[15px] h-[15px] mr-[5px] rounded-[4px] sold-example bg-[#d7d7d7] border border-[#d7d7d7]"></li>
-                    <li className="text-[12px] font-normal leading-[15px] text-[#202020]">Sold</li>
+                    <li className="text-[12px] font-normal leading-[15px] text-[#202020]">
+                      Sold
+                    </li>
                   </ul>
                   <ul className="flex items-center">
                     <li className="w-[15px] h-[15px] mr-[5px] rounded-[4px] selected-example bg-primary-color border border-primary-color"></li>
-                    <li className="text-[12px] font-normal leading-[15px] text-[#202020]">Selected</li>
+                    <li className="text-[12px] font-normal leading-[15px] text-[#202020]">
+                      Selected
+                    </li>
                   </ul>
                 </div>
 
-                <div className="grid grid-cols-4 gap-2 mt-2">
-                  {seats.map((seat, i) => (
-                    <button
-                      key={i}
-                      disabled={bookedSeats.includes(seat)}
-                      onClick={() => toggleSeat(seat)}
-                      className={`p-2 rounded ${
-                        bookedSeats.includes(seat)
-                          ? "bg-red-500 text-white opacity-50 cursor-not-allowed"
-                          : selectedSeats.includes(seat) &&
-                            selectedSeats.length <= maxSeats
-                          ? "bg-primary-color text-white"
-                          : "bg-gray-300 text-gray-600"
-                      } ${
-                        selectedSeats.length >= maxSeats &&
-                        !selectedSeats.includes(seat)
-                          ? "opacity-50 cursor-not-allowed"
-                          : ""
-                      }`}
-                    >
-                      {seat}
-                    </button>
-                  ))}
+                <div className="grid grid-cols-2 gap-10 mt-2">
+                  <div className="grid grid-cols-2 gap-2">
+                    {seats
+                      .filter(
+                        (seat) => seat.includes("1") || seat.includes("2")
+                      )
+                      .map((seat, i) => (
+                        <>
+                          <button
+                            key={i}
+                            disabled={bookedSeats.includes(seat)}
+                            onClick={() => toggleSeat(seat)}
+                            className={`p-2 rounded ${
+                              bookedSeats.includes(seat)
+                                ? "bg-red-500 text-white opacity-50 cursor-not-allowed"
+                                : selectedSeats.includes(seat) &&
+                                  selectedSeats.length <= maxSeats
+                                ? "bg-primary-color text-white"
+                                : "bg-gray-300 text-gray-600"
+                            } ${
+                              selectedSeats.length >= maxSeats &&
+                              !selectedSeats.includes(seat)
+                                ? "opacity-50 cursor-not-allowed"
+                                : ""
+                            }`}
+                          >
+                            {seat}
+                          </button>
+                        </>
+                      ))}
+                  </div>
+                  <div className="grid grid-cols-2 gap-2">
+                    {seats
+                      .filter(
+                        (seat) => seat.includes("3") || seat.includes("4")
+                      )
+                      .map((seat, i) => (
+                        <>
+                          <button
+                            key={i}
+                            disabled={bookedSeats.includes(seat)}
+                            onClick={() => toggleSeat(seat)}
+                            className={`p-2 rounded ${
+                              bookedSeats.includes(seat)
+                                ? "bg-red-500 text-white opacity-50 cursor-not-allowed"
+                                : selectedSeats.includes(seat) &&
+                                  selectedSeats.length <= maxSeats
+                                ? "bg-primary-color text-white"
+                                : "bg-gray-300 text-gray-600"
+                            } ${
+                              selectedSeats.length >= maxSeats &&
+                              !selectedSeats.includes(seat)
+                                ? "opacity-50 cursor-not-allowed"
+                                : ""
+                            }`}
+                          >
+                            {seat}
+                          </button>
+                        </>
+                      ))}
+                  </div>
                 </div>
               </div>
               <div className="mt-4">
