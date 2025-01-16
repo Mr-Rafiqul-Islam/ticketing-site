@@ -5,15 +5,14 @@ const TermsConditon = () => {
     <div className="bg-gray-100 text-gray-800 py-10 px-6 sm:px-16 lg:px-32">
     <div className="max-w-4xl mx-auto bg-white shadow-lg rounded-md p-8">
       <h1
-        className="text-3xl font-bold mb-6"
-        style={{ color: "#E0115F" }}
+        className="text-3xl font-bold mb-6 text-primary-color"
       >
         Terms of Use
       </h1>
 
       <section className="mb-6">
         <p className="mb-4">
-          Welcome to <span className="font-semibold">Touch Ticketing</span>!
+          Welcome to <span className="font-semibold text-primary-color">Touch Ticketing !</span>{" "}
           We’re here to make booking tickets easy and hassle-free. Please read
           our terms of use carefully, as they outline what you can expect
           from us and what we expect from you while using our services.
@@ -22,8 +21,7 @@ const TermsConditon = () => {
 
       <section className="mb-6">
         <h2
-          className="text-xl font-semibold mb-3"
-          style={{ color: "#E0115F" }}
+          className="text-xl font-semibold mb-3 text-primary-color"
         >
           Our Role
         </h2>
@@ -52,8 +50,7 @@ const TermsConditon = () => {
 
       <section className="mb-6">
         <h2
-          className="text-xl font-semibold mb-3"
-          style={{ color: "#E0115F" }}
+          className="text-xl font-semibold mb-3 text-primary-color"
         >
           Important Passenger Guidelines
         </h2>
@@ -80,8 +77,7 @@ const TermsConditon = () => {
 
       <section className="mb-6">
         <h2
-          className="text-xl font-semibold mb-3"
-          style={{ color: "#E0115F" }}
+          className="text-xl font-semibold mb-3 text-primary-color"
         >
           Luggage Policy
         </h2>
@@ -95,8 +91,7 @@ const TermsConditon = () => {
 
       <section className="mb-6">
         <h2
-          className="text-xl font-semibold mb-3"
-          style={{ color: "#E0115F" }}
+          className="text-xl font-semibold mb-3 text-primary-color"
         >
           Communication Policy
         </h2>
@@ -125,8 +120,7 @@ const TermsConditon = () => {
 
       <section className="mb-6">
         <h2
-          className="text-xl font-semibold mb-3"
-          style={{ color: "#E0115F" }}
+          className="text-xl font-semibold mb-3 text-primary-color"
         >
           Miscellaneous
         </h2>
