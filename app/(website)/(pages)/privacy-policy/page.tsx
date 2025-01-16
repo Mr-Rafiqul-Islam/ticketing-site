@@ -101,8 +101,8 @@ By using our website, you give us your consent to collect and use your personal 
             <p className='text-gray-600 mb-4'>To help with ticket purchases, we might access your device’s contacts list. This information is securely sent via our own encrypted platform. You can enable or disable this feature at any time through your device settings. We process your data only within Touch Ticketing’s secure system and do not share it with third parties.</p>
         </div>
         <p className='my-2 text-gray-600'>
-        If you have any questions or concerns, feel free to contact us at:
-        <a href="mailto:info@touchticketing.com" className="text-primary-color hover:underline">info@touchticketing.com.</a>
+        If you have any questions or concerns, feel free to contact us at:{" "}	
+        <a href="mailto:info@touchticketing.com" className="text-primary-color font-bold transition-all duration-300 hover:underline">info@touchticketing.com.</a>
         </p>
       </section>
       {/* Section: Data Safety */}
