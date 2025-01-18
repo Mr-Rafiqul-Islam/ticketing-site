@@ -7,6 +7,7 @@ import Link from "next/link";
 interface SignUpFormValues {
   name: string;
   email: string;
+  phone: string;
   password: string;
 }
 
@@ -19,7 +20,11 @@ const SignUpForm = () => {
 
     mutate(data, {
       onSuccess: () => {
-        router.push("/login"); // Redirect to the login page on success
+        alert("Sign up successful!");
+        router.push("/verify"); // Redirect to the verify page on success
+      },
+      onError: (error: any) => {
+        alert(error.response.data.message);
       },
     });
   };
@@ -59,6 +64,19 @@ const SignUpForm = () => {
                   {...register("email", { required: true })}
                 />
                 {errors.email && <p className="text-red-500">Email is required.</p>}
+              </div>
+              <div>
+                <label htmlFor="phone" className="mb-2 text-lg">
+                  Phone
+                </label>
+                <input
+                  id="phone"
+                  className="border p-3 shadow-md placeholder:text-base ease-in-out duration-300 outline-none border-gray-300 rounded-lg w-full"
+                  type="text"
+                  placeholder="Phone"
+                  {...register("phone", { required: true })}
+                />
+                {errors.phone && <p className="text-red-500">Phone is required.</p>}
               </div>
               <div>
                 <label htmlFor="password" className="mb-2 text-lg">

@@ -5,12 +5,12 @@ import api from "../api";
 // Sign up mutation
 export const useSignUp = () => {
   return useMutation<
-    { name: string; email: string; password: string },
+    { name: string; email: string; phone: string; password: string },
     Error,
-    { name: string; email: string; password: string }
+    { name: string; email: string; phone: string; password: string }
   >({
-    mutationFn: (data: { name: string; email: string; password: string }) =>
-      api.post("/sign-up", data),
+    mutationFn: (data: { name: string; email: string; phone: string; password: string }) =>
+      api.post("/user-registration", data),
   });
 };
 
