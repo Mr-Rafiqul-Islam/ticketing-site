@@ -3,6 +3,7 @@ import { useLogin } from "@/utlis/hooks/useAuth";
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import Image from "next/image";
 
 interface LoginFormValues {
   email: string;
@@ -100,17 +101,21 @@ const LoginForm = () => {
               className="flex items-center justify-center mt-5 flex-wrap"
             >
               <button className="hover:scale-105 ease-in-out duration-300 shadow-lg p-2 rounded-lg m-1">
-                <img
+                <Image
                   className="max-w-[25px]"
-                  src="https://ucarecdn.com/8f25a2ba-bdcf-4ff1-b596-088f330416ef/"
+                  src="/google.svg"
                   alt="Google"
+                  width={30}
+                  height={30}
                 />
               </button>
               <button className="hover:scale-105 ease-in-out duration-300 shadow-lg p-2 rounded-lg m-1">
-                <img
+                <Image
                   className="max-w-[25px]"
-                  src="https://ucarecdn.com/6f56c0f1-c9c0-4d72-b44d-51a79ff38ea9/"
+                  src="facebook.svg"
                   alt="Facebook"
+                  width={30}
+                  height={30}
                 />
               </button>
             </div>
