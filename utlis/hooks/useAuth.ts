@@ -13,6 +13,17 @@ export const useSignUp = () => {
       api.post("/user-registration", data),
   });
 };
+// Verify  mutation
+export const useVerify = () => {
+  return useMutation<
+    { verification_code: string; },
+    Error,
+    { verification_code: string; }
+  >({
+    mutationFn: (data: { verification_code: string; }) =>
+      api.post("/verify", data),
+  });
+};
 
 // Login mutation
 export const useLogin = () => {
