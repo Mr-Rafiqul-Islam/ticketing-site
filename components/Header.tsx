@@ -36,12 +36,12 @@ function Header() {
           <nav className="w-100 text-center hidden md:block">
             <ul className="flex gap-5">
               <li>
-                <a
+                <Link
                   href="/"
                   className="text-sm md:text-base xl:text-xl uppercase font-medium text-white hover:text-slate-950 duration-300 transition-all"
                 >
                   Home
-                </a>
+                </Link>
               </li>
               <li>
                 <a
@@ -118,12 +118,12 @@ function Header() {
                   </SheetHeader>
                   <ul className="flex flex-col gap-4 mt-2">
                     <li className="hover:bg-[#E0115F] group px-2 py-1 duration-300 transition-all">
-                      <a
+                      <Link
                         href="/"
                         className="text-sm md:text-base xl:text-xl uppercase font-medium group-hover:text-white text-slate-950 duration-300 transition-all"
                       >
                         Home
-                      </a>
+                      </Link>
                     </li>
                     <li className="hover:bg-[#E0115F] group px-2 py-1 duration-300 transition-all">
                       <a
