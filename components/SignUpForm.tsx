@@ -1,5 +1,5 @@
 'use client'
-import { useLogin } from "@/utlis/hooks/useAuth";
+import { useSignUp  } from "@/utlis/hooks/useAuth";
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
@@ -12,13 +12,14 @@ interface SignUpFormValues {
 
 const SignUpForm = () => {
   const router = useRouter();
-  const { register, handleSubmit } = useForm<SignUpFormValues>();
-  const { mutate, status, error } = useLogin();
+  const { register, handleSubmit, formState: { errors }  } = useForm<SignUpFormValues>();
+  const { mutate, status, error } = useSignUp ();
 
   const onSubmit = (data: SignUpFormValues) => {
+
     mutate(data, {
       onSuccess: () => {
-        router.push("/"); // Redirect to the home page on success
+        router.push("/login"); // Redirect to the login page on success
       },
     });
   };
@@ -44,6 +45,7 @@ const SignUpForm = () => {
                   placeholder="Name"
                   {...register("name", { required: true })}
                 />
+                {errors.name && <p className="text-red-500">Name is required.</p>}
               </div>
               <div>
                 <label htmlFor="email" className="mb-2 text-lg">
@@ -56,6 +58,7 @@ const SignUpForm = () => {
                   placeholder="Email"
                   {...register("email", { required: true })}
                 />
+                {errors.email && <p className="text-red-500">Email is required.</p>}
               </div>
               <div>
                 <label htmlFor="password" className="mb-2 text-lg">
@@ -68,13 +71,14 @@ const SignUpForm = () => {
                   placeholder="Password"
                   {...register("password", { required: true })}
                 />
+                {errors.password && <p className="text-red-500">Password is required.</p>}
               </div>
               <button
                 className="bg-primary-color shadow-lg mt-6 p-2 text-white rounded-lg w-full hover:scale-105 transition duration-300 ease-in-out"
                 type="submit"
                 disabled={status === 'pending'}
               >
-                {status === 'pending' ? "Loading..." : "Log In"}
+                {status === 'pending' ? "Loading..." : "Sign Up"}
               </button>
               {error && <p className="text-red-500">{(error as any).response.data.message}</p>}
             </form>

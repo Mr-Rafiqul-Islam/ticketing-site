@@ -11,13 +11,18 @@ interface LoginFormValues {
 
 const LoginForm = () => {
   const router = useRouter();
-  const { register, handleSubmit } = useForm<LoginFormValues>();
+  const { register, handleSubmit, formState: { errors } } = useForm<LoginFormValues>();
   const { mutate, status, error } = useLogin();
 
   const onSubmit = (data: LoginFormValues) => {
+    
     mutate(data, {
       onSuccess: () => {
+        alert("Login successful!");
         router.push("/"); // Redirect to the home page on success
+      },
+      onError: (error: any) => {
+        alert(error.response.data.message);
       },
     });
   };
@@ -43,6 +48,7 @@ const LoginForm = () => {
                   placeholder="Email"
                   {...register("email", { required: true })}
                 />
+                {errors.email && <p className="text-red-500">Email is required.</p>}
               </div>
               <div>
                 <label htmlFor="password" className="mb-2 text-lg">
@@ -55,6 +61,7 @@ const LoginForm = () => {
                   placeholder="Password"
                   {...register("password", { required: true })}
                 />
+                {errors.password && <p className="text-red-500">Password is required.</p>}
               </div>
               <a
                 className="group text-blue-400 transition-all duration-100 ease-in-out"
