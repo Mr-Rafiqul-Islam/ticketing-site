@@ -1,10 +1,11 @@
 import axios from 'axios';
 
 const api = axios.create({
-  baseURL: '/api/proxy', // Laravel backend URL
+  baseURL: '/api', // Laravel backend URL
   withCredentials: true,
   headers: {
     'Content-Type': 'application/json',
+    Accept: "application/json",
   },
 });
 
