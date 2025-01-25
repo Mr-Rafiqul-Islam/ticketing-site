@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { Bounce, ToastContainer, toast } from "react-toastify";
 import Link from "next/link";
 import Image from "next/image";
+import queryClient from "@/utlis/queryClient";
 
 interface LoginFormValues {
   email: string;
@@ -19,6 +20,7 @@ const LoginForm = () => {
     formState: { errors },
   } = useForm<LoginFormValues>();
   const { mutate, status, error } = useLogin();
+  
 
   const onSubmit = (data: LoginFormValues) => {
     mutate(data, {
@@ -33,7 +35,11 @@ const LoginForm = () => {
           progress: undefined,
           theme: "light",
           transition: Bounce,
-          onClose: () => router.push("/"), // Redirect to the home page on success
+          onClose: () => {
+            router.push("/");
+            // Manually trigger a refetch of user data
+            queryClient.invalidateQueries({ queryKey: ['user'] });
+          },
         });
       },
       onError: (error: any) => {
