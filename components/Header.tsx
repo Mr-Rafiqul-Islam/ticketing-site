@@ -21,7 +21,7 @@ function Header() {
 
   useEffect(() => {
     refetch();
-  }, [user]);
+  }, [user,refetch]);
 
   const handleLogout = async () => {
     console.log("logout");
