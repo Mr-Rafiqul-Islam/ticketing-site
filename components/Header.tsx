@@ -83,9 +83,9 @@ function Header() {
               )}
             >
               <h1 className="text-xl font-bold">
-                Welcome, {user?.name || "Guest"}!
+                Welcome, {user?.user?.name || "Guest"}!
               </h1>
-              <button className="btn">Logout</button>
+              <button className="btn" onClick={handleLogout}>Logout</button>
             </div>
             {/* menu bar */}
             <div className="block md:hidden">
