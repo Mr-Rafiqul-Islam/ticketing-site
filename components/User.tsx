@@ -37,15 +37,15 @@ function User({ userData }: { userData: userData | null }) {
             {userData?.name || "Guest"}
           </DropdownMenuLabel>
           <DropdownMenuSeparator />
-          <DropdownMenuItem>
+          <DropdownMenuItem className="hover:!text-primary-color ">
             {" "}
             <UserCircle className="h-3 w-3"/> Profile
           </DropdownMenuItem>
-          <DropdownMenuItem>
+          <DropdownMenuItem className="hover:!text-primary-color ">
             {" "}
             <Tag className="h-3 w-3"/> My Booking
           </DropdownMenuItem>
-          <DropdownMenuItem onClick={handleLogout}><LogOut className="h-3 w-3"/> Log Out</DropdownMenuItem>
+          <DropdownMenuItem className="hover:!text-primary-color " onClick={handleLogout}><LogOut className="h-3 w-3"/> Log Out</DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
     </div>
