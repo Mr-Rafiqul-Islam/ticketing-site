@@ -91,7 +91,7 @@ function SearchBar() {
             </div>
             <div className="flex flex-col gap-2 mt-4">
               <button
-                className="bg-primary-color text-white px-14 py-3 rounded-full"
+                className="bg-primary-color text-white px-14 py-3 rounded-full hover:shadow-lg hover:shadow-[#E0115F] transition-all duration-300"
                 onClick={handleSearch}
               >
                 Search
