@@ -21,7 +21,7 @@ export default function Banner() {
         className="custom-swiper"
       >
         <SwiperSlide>
-          <Image src="/banner-1.webp" className="w-full h-auto" alt="" width={10000} height={800} />
+          <Image src="/banner-2.jpg" className="w-full h-auto" alt="" width={10000} height={800} />
         </SwiperSlide>
         <SwiperSlide>
           <Image src="/banner.jpg" alt="" className="w-full h-auto" width={10000} height={800}/>
