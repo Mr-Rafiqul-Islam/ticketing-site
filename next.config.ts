@@ -1,6 +1,6 @@
 import type { NextConfig } from "next";
 
-const MyApi = process.env.NEXT_PUBLIC_API_URL;
+const MyApi = process.env.NEXT_BACKEND_API_URL;
 const nextConfig: NextConfig = {
   /* config options here */
   async rewrites() {

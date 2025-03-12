@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
 import { useVerify } from "@/utlis/hooks/useAuth";
 import { Bounce, ToastContainer, toast } from "react-toastify";
+import { Button } from "@/components/ui/button";
 
 interface VerifyFormValues {
   verification_code: string;
@@ -87,12 +88,9 @@ const Verify = () => {
           )}
         </div>
         <div className="flex items-center justify-between">
-          <button
-            className="bg-primary-color hover:bg-primary-color/90 transition-all duration-300 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-            type="submit"
-          >
-            Verify
-          </button>
+          
+          <Button variant={"default"} className="bg-primary-color hover:bg-primary-color/90 transition-all duration-300" type="submit">Verify</Button>
+          <Button variant={"default"}>Resend</Button>
         </div>
         {error && (
           <p className="text-red-500">{(error as any).response.data.message}</p>
