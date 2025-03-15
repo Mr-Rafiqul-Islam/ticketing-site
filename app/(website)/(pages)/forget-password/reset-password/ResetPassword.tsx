@@ -7,22 +7,65 @@ import Link from "next/link";
 import Image from "next/image";
 import queryClient from "@/utlis/queryClient";
 import { Button } from '@/components/ui/button';
+import { useResetPassword } from '@/utlis/hooks/useResetPassword';
 
-interface LoginFormValues {
+interface ResetFormValues {
   email: string;
-  code: number;
+  reset_code: number;
   password: string;
 }
 function ResetPassword() {
+  const {
+      register,
+      handleSubmit,
+      formState: { errors },
+    } = useForm<ResetFormValues>();
+  const { mutate, status, error } = useResetPassword();
+
+  const router = useRouter();
+  const onSubmit = (data: ResetFormValues) => {
+    mutate(data, {
+      onSuccess: () => {
+        toast("Password Reset successful!👌", {
+          position: "top-right",
+          autoClose: 1500,
+          hideProgressBar: false,
+          closeOnClick: false,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+          transition: Bounce,
+          onClose: () => {
+            router.push("/login");
+          },
+        });
+      },
+      onError: (error: any) => {
+        toast(error.response.data.message, {
+          position: "top-right",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: false,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+          transition: Bounce,
+        });
+        console.log(error.response.data.message);
+      },
+    });
+  };
   return (
     <div>
         <form
         className="bg-white shadow-md rounded px-8 py-6"
-        // onSubmit={handleSubmit(onSubmit)}
+        onSubmit={handleSubmit(onSubmit)}
       >
         <div className="mb-4">
           <label
-            className="block text-gray-700 text-sm font-bold mb-2"
+            className="block text-gray-700 text-sm font-bold mb-2"  
             htmlFor="email"
           >
             Email
@@ -32,25 +75,25 @@ function ResetPassword() {
             id="email"
             type="email"
             placeholder="Enter Your Email"
-            // {...register("email", { required: true })}
+            {...register("email", { required: true })}
           />
           
           <label
             className="block text-gray-700 text-sm font-bold mb-2"
             htmlFor="verification_code"
           >
-            Verification Code:
+            Reset Code:
           </label>
           <input
             className="shadow appearance-none border rounded w-full mb-2 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            id="verification_code"
-            type="text"
+            id="reset_code"
+            type="number"
             placeholder="Enter OTP"
-            // {...register("verification_code", { required: true })}
+            {...register("reset_code", { required: true })}
           />
-          {/* {errors.verification_code && (
+          {errors.reset_code && (
             <p className="text-red-500">OTP is required.</p>
-          )} */}
+          )}
           <label
             className="block text-gray-700 text-sm font-bold mb-2"
             htmlFor="password"
@@ -62,21 +105,21 @@ function ResetPassword() {
             id="password"
             type="password"
             placeholder="Type new password"
-            // {...register("password", { required: true })}
+            {...register("password", { required: true })}
           />
         </div>
         <div className="flex items-center justify-end">
           
           <Button
             variant={"default"}
-            // onClick={handleResend}
+            type='submit'
           >
             Reset Password
           </Button>
         </div>
-        {/* {error && (
-          <p className="text-red-500">{(error as any).response.data.message}</p>
-        )} */}
+        {error && (
+          <p className="text-red-500 max-w-32">{(error as any).response.data.message}</p>
+        )}
       </form>
     </div>
   )

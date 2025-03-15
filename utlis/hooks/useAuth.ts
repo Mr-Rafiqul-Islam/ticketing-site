@@ -11,7 +11,7 @@ const setRegisteredEmail = (email: string) => {
   localStorage.setItem("registeredEmail", email);
 };
 // Get token from local storage
-const getToken = () => {
+export const getToken = () => {
   return localStorage.getItem("authToken");
 };
 
