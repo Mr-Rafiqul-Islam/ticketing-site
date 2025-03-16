@@ -7,12 +7,7 @@ export const useFetchLocations = () => {
   return useQuery({
     queryKey: ["location-bus"],
     queryFn: async () => {
-      const token = getToken    ();
-      const response = await api.get("/location-bus",{
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      const response = await api.get("/location-bus");
       return response.data;
     },
   });
