@@ -101,6 +101,7 @@ const LoginForm = () => {
               className="border p-3 shadow-md placeholder:text-base ease-in-out duration-300 outline-none border-gray-300 rounded-lg w-full"
               type="password"
               placeholder="Password"
+              autoComplete="off"
               {...register("password", { required: true })}
             />
             {errors.password && (
