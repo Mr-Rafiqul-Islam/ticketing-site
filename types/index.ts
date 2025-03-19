@@ -114,6 +114,11 @@ export type Vehicle = {
     created_at: string;
     updated_at: string;
   };
+  seats: {
+    id: number;
+    seat_no: string;
+    is_booked: number;
+  }[];
 };
 
 export type Company = {
@@ -157,3 +162,4 @@ export type Trip = {
   driver: Employee;
   supervisor: Employee;
 };
+

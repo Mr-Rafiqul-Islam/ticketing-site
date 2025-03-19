@@ -26,7 +26,7 @@ const BusCard = ({ trip }: { trip: Trip }) => {
             {trip?.vehicle?.name}
           </h3>
           <p className="text-gray-400 text-xs md:text-base">
-            <span>{trip?.vehicle?.type?.name}</span>
+          {trip?.vehicle?.category == "0" ? "Economy Class" : trip?.vehicle?.category == "1" ? "Business Class" : "Sleeping Coach"}, <span>{trip?.vehicle?.type?.name}</span>
           </p>
           <p className="text-gray-700 text-xs md:text-base">
             <strong>Route: </strong>

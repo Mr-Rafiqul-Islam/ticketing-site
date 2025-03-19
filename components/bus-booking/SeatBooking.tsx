@@ -12,6 +12,8 @@ import { PiSeatBold } from "react-icons/pi";
 import { GiStarFormation } from "react-icons/gi";
 import { IoShieldCheckmarkOutline } from "react-icons/io5";
 import SeatLayout from "./SeatLayout";
+import { Trip } from "@/types";
+import { formatTime } from "@/lib/helper";
 
 const seats = [
   "A1",
@@ -54,9 +56,11 @@ const seats = [
 function SeatBooking({
   isOpen,
   onClose,
+  trip,
 }: {
   isOpen: boolean;
   onClose: () => void;
+  trip: Trip;
 }) {
   const [selectedSeats, setSelectedSeats] = useState<string[]>([]);
   const [bookedSeats, setBookedSeats] = useState<string[]>(["A1", "B3"]); // add booked seats here
@@ -112,24 +116,34 @@ function SeatBooking({
             <div className="h-full">
               <div className="flex items-center justify-between">
                 <div>
-                  <h2 className="text-xl font-bold">Hanif Enterprise</h2>
+                  <h2 className="text-xl font-bold">{trip?.vehicle?.name}</h2>
                   <p className="text-sm text-gray-600">
-                    Hino, AK1J Super Plus Non AC
+                    {trip?.vehicle?.type?.name}
                   </p>
-                  <p className="text-sm text-gray-600">Coach No. #800</p>
+                  <p className="text-sm text-gray-600">
+                    Coach No. #{trip?.vehicle?.vehicle_no}
+                  </p>
                 </div>
               </div>
               <div className="mt-4">
                 <div className="flex justify-between">
                   <div>
                     <p className="text-sm text-gray-600">Departure</p>
-                    <p className="text-lg font-bold">Dhaka</p>
-                    <p className="text-sm text-gray-600">06:30 AM</p>
+                    <p className="text-lg font-bold">
+                      {trip?.route.from_location.name}
+                    </p>
+                    <p className="text-sm text-gray-600">
+                      {trip?.start_time ? formatTime(trip.start_time) : "N/A"}
+                    </p>
                   </div>
                   <div>
                     <p className="text-sm text-gray-600">Arrival</p>
-                    <p className="text-lg font-bold">Cox's Bazar</p>
-                    <p className="text-sm text-gray-600">02:01 PM</p>
+                    <p className="text-lg font-bold">
+                      {trip?.route.to_location.name}
+                    </p>
+                    <p className="text-sm text-gray-600">
+                      {trip?.end_time ? formatTime(trip.end_time) : "N/A"}
+                    </p>
                   </div>
                 </div>
                 <p className="text-xs text-gray-500 mt-2">
@@ -142,13 +156,13 @@ function SeatBooking({
                 </p>
                 <div className="flex justify-around my-4">
                   <ul className="flex items-center">
-                    <li className="w-[15px] h-[15px] mr-[5px] rounded-[4px] available-example bg-white border border-black"></li>
+                    <li className="w-[15px] h-[15px] mr-[5px] rounded-[4px] available-example bg-[#d7d7d7] border border-[#d7d7d7]"></li>
                     <li className="text-[12px] font-normal leading-[15px] text-[#202020]">
                       Available
                     </li>
                   </ul>
                   <ul className="flex items-center">
-                    <li className="w-[15px] h-[15px] mr-[5px] rounded-[4px] sold-example bg-[#d7d7d7] border border-[#d7d7d7]"></li>
+                    <li className="w-[15px] h-[15px] mr-[5px] rounded-[4px] sold-example bg-red-500  opacity-50 border border-[#ef4444]"></li>
                     <li className="text-[12px] font-normal leading-[15px] text-[#202020]">
                       Sold
                     </li>
@@ -162,7 +176,8 @@ function SeatBooking({
                 </div>
                 {/* Seat Layout part start  */}
                 <SeatLayout
-                  seats={seats}
+                  seats={trip?.vehicle.seats}
+                  vehicle_category={trip?.vehicle.category}
                   bookedSeats={bookedSeats}
                   selectedSeats={selectedSeats}
                   toggleSeat={toggleSeat}
@@ -171,14 +186,19 @@ function SeatBooking({
                 {/* Seat Layout part end  */}
               </div>
               <div className="mt-4">
-                <p className="text-lg font-bold">Total: ৳2000</p>
+                <p className="text-lg font-bold">
+                  Total: ৳{trip?.ticket_price}
+                </p>
                 <button className="bg-primary-color text-white p-3 w-full rounded mt-2">
                   Continue
                 </button>
               </div>
             </div>
           </TabsContent>
-          <TabsContent value="amneties">Change your password here.</TabsContent>
+          <TabsContent value="amneties">
+            Check Your Amnities here.
+            <p>id:{trip?.vehicle?.amenities_id}</p>
+          </TabsContent>
           <TabsContent value="policies">Policies are given here.</TabsContent>
         </Tabs>
       </SheetContent>
