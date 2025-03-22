@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Sheet,
   SheetContent,
@@ -12,47 +12,9 @@ import { PiSeatBold } from "react-icons/pi";
 import { GiStarFormation } from "react-icons/gi";
 import { IoShieldCheckmarkOutline } from "react-icons/io5";
 import SeatLayout from "./SeatLayout";
-import { Trip } from "@/types";
+import { Seats, Trip } from "@/types";
 import { formatTime } from "@/lib/helper";
 
-const seats = [
-  "A1",
-  "A2",
-  "A3",
-  "A4",
-  "B1",
-  "B2",
-  "B3",
-  "B4",
-  "C1",
-  "C2",
-  "C3",
-  "C4",
-  "D1",
-  "D2",
-  "D3",
-  "D4",
-  "E1",
-  "E2",
-  "E3",
-  "E4",
-  "F1",
-  "F2",
-  "F3",
-  "F4",
-  "G1",
-  "G2",
-  "G3",
-  "G4",
-  "H1",
-  "H2",
-  "H3",
-  "H4",
-  "I1",
-  "I2",
-  "I3",
-  "I4",
-];
 function SeatBooking({
   isOpen,
   onClose,
@@ -62,8 +24,14 @@ function SeatBooking({
   onClose: () => void;
   trip: Trip;
 }) {
+  
   const [selectedSeats, setSelectedSeats] = useState<string[]>([]);
-  const [bookedSeats, setBookedSeats] = useState<string[]>(["A1", "B3"]); // add booked seats here
+  const [bookedSeats, setBookedSeats] = useState<Seats[]>([]);
+  useEffect(() => {
+    const initialBookedSeats = trip?.vehicle?.seats.filter((seat) => seat.is_booked == 2);
+    setBookedSeats(initialBookedSeats);
+  }, [trip]);
+  // const [bookedSeats, setBookedSeats] = useState<Seats[]>(initialBookedSeats); // add booked seats here
   const maxSeats = 4;
 
   const toggleSeat = (seat: string) => {
@@ -197,7 +165,9 @@ function SeatBooking({
           </TabsContent>
           <TabsContent value="amneties">
             Check Your Amnities here.
-            <p>id:{trip?.vehicle?.amenities_id}</p>
+            <ol className="mt-2 list-decimal">{trip?.vehicle?.amenities?.map((item) => (
+              <li key={item.id} className="py-2">{item.name}</li>
+            ))}</ol>
           </TabsContent>
           <TabsContent value="policies">Policies are given here.</TabsContent>
         </Tabs>

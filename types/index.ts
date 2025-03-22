@@ -87,6 +87,11 @@ export type Route = {
   route_manager: Employee;
 };
 
+export type Seats = {
+  id: number;
+  seat_no: string;
+  is_booked: number;
+};
 export type Vehicle = {
   id: number;
   company_id: number;
@@ -114,10 +119,10 @@ export type Vehicle = {
     created_at: string;
     updated_at: string;
   };
-  seats: {
+  seats: Seats[];
+  amenities?: {
     id: number;
-    seat_no: string;
-    is_booked: number;
+    name: string;
   }[];
 };
 

@@ -1,20 +1,17 @@
+import { Seats } from "@/types";
 import React from "react";
 
-type Seats = {
-  id: number;
-  seat_no: string;
-  is_booked: number;
-};
+
 interface SeatLayoutProps {
   seats: Seats[];
   vehicle_category: string;
-  bookedSeats: string[];
+  bookedSeats: Seats[];
   selectedSeats: string[];
   toggleSeat: (seat: string) => void;
   maxSeats: number;
 }
 
-const SeatLayout: React.FC<SeatLayoutProps> = ({
+const  SeatLayout: React.FC<SeatLayoutProps> = ({
   seats,
   vehicle_category,
   bookedSeats,
@@ -33,13 +30,13 @@ const SeatLayout: React.FC<SeatLayoutProps> = ({
                   (seat) =>
                     seat.seat_no.includes("1") || seat.seat_no.includes("2")
                 )
-                .map((seat, i) => (
+                .map((seat) => (
                   <button
                     key={seat.id}
-                    disabled={bookedSeats.includes(seat.seat_no)}
+                    disabled={bookedSeats.some(s => s.seat_no === seat.seat_no)}
                     onClick={() => toggleSeat(seat.seat_no)}
                     className={`p-2 rounded ${
-                      bookedSeats.includes(seat.seat_no)
+                      bookedSeats.some(s => s.seat_no === seat.seat_no)
                         ? "bg-red-500 text-white opacity-50 cursor-not-allowed"
                         : selectedSeats.includes(seat.seat_no) &&
                           selectedSeats.length <= maxSeats
@@ -65,10 +62,10 @@ const SeatLayout: React.FC<SeatLayoutProps> = ({
                 .map((seat, i) => (
                   <button
                     key={seat.id}
-                    disabled={bookedSeats.includes(seat.seat_no)}
+                    disabled={bookedSeats.some(s => s.seat_no === seat.seat_no)}
                     onClick={() => toggleSeat(seat.seat_no)}
                     className={`p-2 rounded ${
-                      bookedSeats.includes(seat.seat_no)
+                      bookedSeats.some(s => s.seat_no === seat.seat_no)
                         ? "bg-red-500 text-white opacity-50 cursor-not-allowed"
                         : selectedSeats.includes(seat.seat_no) &&
                           selectedSeats.length <= maxSeats
@@ -98,10 +95,10 @@ const SeatLayout: React.FC<SeatLayoutProps> = ({
                   .map((seat) => (
                     <button
                       key={seat.id}
-                      disabled={bookedSeats.includes(seat.seat_no)}
+                      disabled={bookedSeats.some(s => s.seat_no === seat.seat_no)}
                       onClick={() => toggleSeat(seat.seat_no)}
                       className={`w-full p-2 rounded ${
-                        bookedSeats.includes(seat.seat_no)
+                        bookedSeats.some(s => s.seat_no === seat.seat_no)
                           ? "bg-red-500 text-white opacity-50 cursor-not-allowed"
                           : selectedSeats.includes(seat.seat_no) &&
                             selectedSeats.length <= maxSeats
@@ -130,10 +127,10 @@ const SeatLayout: React.FC<SeatLayoutProps> = ({
                 .map((seat) => (
                   <button
                     key={seat.id}
-                    disabled={bookedSeats.includes(seat.seat_no)}
+                    disabled={bookedSeats.some(s => s.seat_no === seat.seat_no)}
                     onClick={() => toggleSeat(seat.seat_no)}
                     className={`w-full p-2 rounded ${
-                      bookedSeats.includes(seat.seat_no)
+                      bookedSeats.some(s => s.seat_no === seat.seat_no)
                         ? "bg-red-500 text-white opacity-50 cursor-not-allowed"
                         : selectedSeats.includes(seat.seat_no) &&
                           selectedSeats.length <= maxSeats
