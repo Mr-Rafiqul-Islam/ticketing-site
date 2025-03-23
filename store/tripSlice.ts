@@ -1,14 +1,11 @@
+import { Seats } from "@/types";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-interface SeatData {
-  seatId: string;
-  seatNo: string;
-  seatPrice: number;
-}
+
 
 interface TripState {
-  trip_id: string | null;
-  seat_data: SeatData[];
+  trip_id: number | null;
+  seat_data: Seats[];
   travel_date: string | null;
 }
 

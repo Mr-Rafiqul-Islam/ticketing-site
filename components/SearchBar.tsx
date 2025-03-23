@@ -80,6 +80,7 @@ const {
       onSuccess: (data) => {
         // console.log(data, "TRIP DATA");
         setData(data); // Store data in context
+        console.log(data);
         return data;
       },
       onError: (error) => {

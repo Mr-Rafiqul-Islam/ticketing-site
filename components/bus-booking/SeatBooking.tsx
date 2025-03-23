@@ -14,6 +14,10 @@ import { IoShieldCheckmarkOutline } from "react-icons/io5";
 import SeatLayout from "./SeatLayout";
 import { Seats, Trip } from "@/types";
 import { formatTime } from "@/lib/helper";
+import { useDispatch } from "react-redux";
+import { setTripData } from "@/store/tripSlice";
+import { Bounce, toast, ToastContainer } from "react-toastify";
+import { useRouter } from "next/navigation";
 
 function SeatBooking({
   isOpen,
@@ -24,14 +28,15 @@ function SeatBooking({
   onClose: () => void;
   trip: Trip;
 }) {
-  
+  const dispatch = useDispatch();
   const [selectedSeats, setSelectedSeats] = useState<string[]>([]);
   const [bookedSeats, setBookedSeats] = useState<Seats[]>([]);
+  const [seatData, setSeatData] = useState<Seats[]>([]);
+  const totalSeatsArray = trip?.vehicle?.seats;
   useEffect(() => {
-    const initialBookedSeats = trip?.vehicle?.seats.filter((seat) => seat.is_booked == 2);
+    const initialBookedSeats = totalSeatsArray.filter((seat) => seat.is_booked == 2);
     setBookedSeats(initialBookedSeats);
   }, [trip]);
-  // const [bookedSeats, setBookedSeats] = useState<Seats[]>(initialBookedSeats); // add booked seats here
   const maxSeats = 4;
 
   const toggleSeat = (seat: string) => {
@@ -39,13 +44,52 @@ function SeatBooking({
       setSelectedSeats((prev) =>
         prev.includes(seat) ? prev.filter((s) => s !== seat) : [...prev, seat]
       );
+      console.log(selectedSeats);
     } else if (selectedSeats.includes(seat)) {
       setSelectedSeats((prev) => prev.filter((s) => s !== seat));
+      console.log(selectedSeats);
     }
   };
 
+  useEffect(() => {
+    const selectedSeatsData = totalSeatsArray.filter((seat) =>
+      selectedSeats.includes(seat.seat_no)
+    );
+    setSeatData(selectedSeatsData);
+  }, [selectedSeats]);
+  
+ 
+  const router = useRouter();
+  const handleContinue = (trip: Trip) => {
+    const getToken = localStorage.getItem("authToken");
+    if (getToken) {
+      dispatch(
+        setTripData({
+          trip_id: trip.id,
+          seat_data: seatData,
+          travel_date: trip.start_date,
+        })
+      );
+      router.push("/booking");
+    } else {
+      toast.error("Please login to continue");
+    }
+  }
   return (
     <Sheet open={isOpen} onOpenChange={onClose}>
+      <ToastContainer
+        position="top-right"
+        autoClose={1500}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick={false}
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+        transition={Bounce}
+      />
       <SheetContent className="w-full max-h-screen overflow-y-scroll">
         <Tabs defaultValue="seat">
           <SheetHeader>
@@ -157,7 +201,7 @@ function SeatBooking({
                 <p className="text-lg font-bold">
                   Total: ৳{trip?.ticket_price}
                 </p>
-                <button className="bg-primary-color text-white p-3 w-full rounded mt-2">
+                <button className="bg-primary-color text-white p-3 w-full rounded mt-2" onClick={() => handleContinue(trip)}>
                   Continue
                 </button>
               </div>
