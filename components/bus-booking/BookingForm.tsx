@@ -76,6 +76,8 @@ export default function BookingForm() {
 
   return (
     <div className="max-w-7xl mx-auto p-6 grid grid-cols-3 gap-6">
+      {/* Passenger Details */}
+      <div className="col-span-2">
       <ToastContainer
         position="top-right"
         autoClose={1500}
@@ -89,8 +91,6 @@ export default function BookingForm() {
         theme="light"
         transition={Bounce}
       />
-      {/* Passenger Details */}
-      <div className="col-span-2">
         <Card>
           <CardHeader>
             <CardTitle>Passenger Details</CardTitle>

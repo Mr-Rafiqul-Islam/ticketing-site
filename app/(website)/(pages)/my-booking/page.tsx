@@ -128,7 +128,7 @@ const MyBooking = () => {
                   {bookingList?.length > 0 ? (
                     <div>
                       {bookingList.map((item) => (
-                        <div key={item.id} className="border-b ">
+                        <div key={item.id} className="border-b mb-2">
                           <h2 className="text-xl text-primary-color font-bold">{item.company?.name}</h2>
                           <div className="flex gap-2 my-2">
                             <span>
@@ -159,7 +159,7 @@ const MyBooking = () => {
                           <div className="flex gap-2 my-2">
                             <strong>Total Price :</strong>
                             <span className="flex gap-2">
-                              {`${item?.trip?.ticket_price}BDT x${ item?.seat_data?.length} = ${  item?.trip?.ticket_price * item?.seat_data?.length}BDT`}
+                              {`${item?.trip?.ticket_price}BDT x${ item?.seat_data?.length} = ${ item?.trip?.ticket_price * item?.seat_data?.length}BDT`}
                             </span>
                           </div>
                         </div>

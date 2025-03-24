@@ -16,18 +16,8 @@ const Profile = () => {
   const [isEditing, setIsEditing] = useState(false);
   const [formData, setFormData] = useState({
     name: user ? user?.user.name : "N/A",
-    gender: "Male",
-    presentAddress: "N/A",
-    permanentAddress: "N/A",
-    maritalStatus: "N/A",
-    dateOfBirth: "N/A",
-    passportCountry: "Bangladesh",
-    passportNumber: "N/A",
-    passportExpiry: "N/A",
-    nationalID: "N/A",
-    nationality: "Bangladesh",
-    emergencyContact: "N/A",
-    religion: "N/A",
+    email: user ? user?.user.email : "N/A",
+    phone: user ? user?.user.phone : "N/A",
   });
   const handleEdit = () => setIsEditing(true);
   const handleCancel = () => setIsEditing(false);
@@ -38,21 +28,7 @@ const Profile = () => {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
-  // const profileData = [
-  //   { label: "Name", value: user ? user?.user.name : "N/A" },
-  //   { label: "Gender", value: "Male" },
-  //   { label: "Present Address", value: "N/A" },
-  //   { label: "Permanent Address", value: "N/A" },
-  //   { label: "Marital Status", value: "N/A" },
-  //   { label: "Date of Birth", value: "N/A" },
-  //   { label: "Passport Country", value: "Bangladesh" },
-  //   { label: "Passport Number", value: "N/A" },
-  //   { label: "Passport Expiry Date", value: "N/A" },
-  //   { label: "National ID", value: "N/A" },
-  //   { label: "Nationality", value: "Bangladesh" },
-  //   { label: "Emergency Contact", value: "N/A" },
-  //   { label: "Religion", value: "N/A" },
-  // ];
+  
   const settingsData = [
     { label: "Email", value: user ? user?.user.email : "N/A" },
     { label: "Mobile Number", value: user ? user?.user.phone : "N/A" },
@@ -91,9 +67,7 @@ const Profile = () => {
                     <span className="text-xl text-gray-600">Avatar</span>
                   </div>
                 )}
-                <Button variant="outline" className="flex items-center gap-2">
-                  <Pencil size={16} /> Edit
-                </Button>
+                
               </div>
               <ul className="space-y-2 text-start">
                 <li
@@ -205,8 +179,8 @@ const Profile = () => {
                       <td className="font-medium text-gray-700 py-2 capitalize">
                         Password
                       </td>
-                      <td className="text-[#020842] py-2 font-bold cursor-pointer">
-                        Change Password ?
+                      <td className="py-2">
+                        <span className="text-[#020842] font-bold cursor-pointer">Change Password ?</span>
                       </td>
                     </tr>
                   </tbody>
