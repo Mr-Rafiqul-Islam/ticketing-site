@@ -24,6 +24,7 @@ const getRegisteredEmail = () => {
 const removeAuthData = () => {
   localStorage.removeItem("authToken");
   localStorage.removeItem("registeredEmail");
+  localStorage.removeItem("user_id");
 };
 
 // Sign up mutation
