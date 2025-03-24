@@ -8,20 +8,9 @@ import { Label } from "@/components/ui/label";
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "@/store/store";
-import api from "@/utlis/api";
-import { useMutation } from "@tanstack/react-query";
-import { Seats } from "@/types";
 import { useBooking } from "@/utlis/hooks/useBooking";
-import { on } from "events";
-
-interface BookingData {
-  user_id: number;
-  passenger_phone: number;
-  passenger_name: string;
-  seat_data: number[];
-  trip_id: number;
-  travel_date: string;
-}
+import { Bounce, toast, ToastContainer } from "react-toastify";
+import { useRouter } from "next/navigation";
 
 type BookingFormData = {
   passenger_phone: number;
@@ -29,6 +18,7 @@ type BookingFormData = {
 };
 
 export default function BookingForm() {
+  const router = useRouter();
   const {
     register,
     handleSubmit,
@@ -49,22 +39,56 @@ export default function BookingForm() {
       travel_date: tripData.travel_date ?? "", // Provide a default value or handle null
     };
     console.log(bookingPayload);
-    mutate(bookingPayload,
-      {
-        onSuccess: () => {
-          // Handle success, e.g., show a success message
-          console.log("Booking successful!");
-        },
-        onError: () => {
-          // Handle error, e.g., show an error message
-          console.log("Booking failed!");
-        },
-      }
-    );
+    mutate(bookingPayload, {
+      onSuccess: () => {
+        // Handle success, e.g., show a success message
+        console.log("Booking successful!");
+        toast("Booking successful!👌🎉", {
+          position: "top-right",
+          autoClose: 1500,
+          hideProgressBar: false,
+          closeOnClick: false,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+          transition: Bounce, // Redirect to the verify page on success
+          onClose: () => router.push("/my-booking"),
+        });
+      },
+      onError: (error: any) => {
+        // Handle error, e.g., show an error message
+        console.log("Booking failed!");
+        toast(error.response.data.message, {
+          position: "top-right",
+          autoClose: 1500,
+          hideProgressBar: false,
+          closeOnClick: false,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+          transition: Bounce,
+        });
+      },
+    });
   };
 
   return (
     <div className="max-w-7xl mx-auto p-6 grid grid-cols-3 gap-6">
+      <ToastContainer
+        position="top-right"
+        autoClose={1500}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick={false}
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+        transition={Bounce}
+      />
       {/* Passenger Details */}
       <div className="col-span-2">
         <Card>
