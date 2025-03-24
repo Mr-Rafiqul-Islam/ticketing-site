@@ -129,6 +129,29 @@ export type Vehicle = {
   }[];
 };
 
+export type SiteSetting = {
+  id: number;
+  company_id: number;
+  name: string | null;
+  title: string | null;
+  meta_description: string | null;
+  favicon: string;
+  logo: string;
+  site_preview_image: string;
+  email: string | null;
+  phone: string | null;
+  address: string | null;
+  short_description: string | null;
+  site_link: string | null;
+  facebook_link: string | null;
+  twitter_link: string | null;
+  linkedin_link: string | null;
+  instagram_link: string | null;
+  youtube_link: string | null;
+  created_at: string;
+  updated_at: string;
+};
+
 export type Company = {
   id: number;
   name: string;
@@ -143,6 +166,7 @@ export type Company = {
   is_registration_by: string | null;
   created_at: string;
   updated_at: string;
+  site_setting: SiteSetting;
 };
 
 export type Trip = {
@@ -171,3 +195,22 @@ export type Trip = {
   supervisor: Employee;
 };
 
+export type BookingList = {
+  id: number;
+  company_id: number;
+  trip_id: number;
+  vehicle_id: number;
+  seat_data: {
+    seatId: number;
+    seatNo: string;
+    seatPrice: string;
+  }[];
+  passenger_name: string;
+  passenger_phone: string;
+  travel_date: string;
+  user_id: string;
+  type: string;
+  deleted_at: string | null;
+  created_at: string;
+  updated_at: string;
+};
