@@ -87,6 +87,9 @@ export type Route = {
   route_manager: Employee;
 };
 
+export type SeatState = {
+  id: number;
+}
 export type Seats = {
   id: number;
   seat_no: string;

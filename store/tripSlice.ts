@@ -1,15 +1,18 @@
-import { Seats } from "@/types";
+import { Seats, SeatState } from "@/types";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 
 
+
 interface TripState {
+  user_id: number | null;
   trip_id: number | null;
-  seat_data: Seats[];
+  seat_data: SeatState[];
   travel_date: string | null;
 }
 
 const initialState: TripState = {
+  user_id: null,
   trip_id: null,
   seat_data: [],
   travel_date: null,

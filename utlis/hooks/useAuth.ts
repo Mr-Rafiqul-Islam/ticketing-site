@@ -105,6 +105,7 @@ export const useFetchUser = () => {
           Authorization: `Bearer ${token}`,
         },
       });
+      localStorage.setItem("user_id", response.data.user.id);
       return response.data;
     },
   });

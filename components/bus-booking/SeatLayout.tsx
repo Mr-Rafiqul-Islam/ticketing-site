@@ -6,8 +6,8 @@ interface SeatLayoutProps {
   seats: Seats[];
   vehicle_category: string;
   bookedSeats: Seats[];
-  selectedSeats: string[];
-  toggleSeat: (seat: string) => void;
+  selectedSeats: number[];
+  toggleSeat: (seat: number) => void;
   maxSeats: number;
 }
 
@@ -34,17 +34,17 @@ const  SeatLayout: React.FC<SeatLayoutProps> = ({
                   <button
                     key={seat.id}
                     disabled={bookedSeats.some(s => s.seat_no === seat.seat_no)}
-                    onClick={() => toggleSeat(seat.seat_no)}
+                    onClick={() => toggleSeat(seat.id)}
                     className={`p-2 rounded ${
                       bookedSeats.some(s => s.seat_no === seat.seat_no)
                         ? "bg-red-500 text-white opacity-50 cursor-not-allowed"
-                        : selectedSeats.includes(seat.seat_no) &&
+                        : selectedSeats.includes(seat.id) &&
                           selectedSeats.length <= maxSeats
                         ? "bg-primary-color text-white"
                         : "bg-gray-300 text-gray-600"
                     } ${
                       selectedSeats.length >= maxSeats &&
-                      !selectedSeats.includes(seat.seat_no)
+                      !selectedSeats.includes(seat.id)
                         ? "opacity-50 cursor-not-allowed"
                         : ""
                     }`}
@@ -63,17 +63,17 @@ const  SeatLayout: React.FC<SeatLayoutProps> = ({
                   <button
                     key={seat.id}
                     disabled={bookedSeats.some(s => s.seat_no === seat.seat_no)}
-                    onClick={() => toggleSeat(seat.seat_no)}
+                    onClick={() => toggleSeat(seat.id)}
                     className={`p-2 rounded ${
                       bookedSeats.some(s => s.seat_no === seat.seat_no)
                         ? "bg-red-500 text-white opacity-50 cursor-not-allowed"
-                        : selectedSeats.includes(seat.seat_no) &&
+                        : selectedSeats.includes(seat.id) &&
                           selectedSeats.length <= maxSeats
                         ? "bg-primary-color text-white"
                         : "bg-gray-300 text-gray-600"
                     } ${
                       selectedSeats.length >= maxSeats &&
-                      !selectedSeats.includes(seat.seat_no)
+                      !selectedSeats.includes(seat.id)
                         ? "opacity-50 cursor-not-allowed"
                         : ""
                     }`}
@@ -96,17 +96,17 @@ const  SeatLayout: React.FC<SeatLayoutProps> = ({
                     <button
                       key={seat.id}
                       disabled={bookedSeats.some(s => s.seat_no === seat.seat_no)}
-                      onClick={() => toggleSeat(seat.seat_no)}
+                      onClick={() => toggleSeat(seat.id)}
                       className={`w-full p-2 rounded ${
                         bookedSeats.some(s => s.seat_no === seat.seat_no)
                           ? "bg-red-500 text-white opacity-50 cursor-not-allowed"
-                          : selectedSeats.includes(seat.seat_no) &&
+                          : selectedSeats.includes(seat.id) &&
                             selectedSeats.length <= maxSeats
                           ? "bg-primary-color text-white"
                           : "bg-gray-300 text-gray-600"
                       } ${
                         selectedSeats.length >= maxSeats &&
-                        !selectedSeats.includes(seat.seat_no)
+                        !selectedSeats.includes(seat.id)
                           ? "opacity-50 cursor-not-allowed"
                           : ""
                       }`}
@@ -128,17 +128,17 @@ const  SeatLayout: React.FC<SeatLayoutProps> = ({
                   <button
                     key={seat.id}
                     disabled={bookedSeats.some(s => s.seat_no === seat.seat_no)}
-                    onClick={() => toggleSeat(seat.seat_no)}
+                    onClick={() => toggleSeat(seat.id)}
                     className={`w-full p-2 rounded ${
                       bookedSeats.some(s => s.seat_no === seat.seat_no)
                         ? "bg-red-500 text-white opacity-50 cursor-not-allowed"
-                        : selectedSeats.includes(seat.seat_no) &&
+                        : selectedSeats.includes(seat.id) &&
                           selectedSeats.length <= maxSeats
                         ? "bg-primary-color text-white"
                         : "bg-gray-300 text-gray-600"
                     } ${
                       selectedSeats.length >= maxSeats &&
-                      !selectedSeats.includes(seat.seat_no)
+                      !selectedSeats.includes(seat.id)
                         ? "opacity-50 cursor-not-allowed"
                         : ""
                     }`}

@@ -12,7 +12,7 @@ import { PiSeatBold } from "react-icons/pi";
 import { GiStarFormation } from "react-icons/gi";
 import { IoShieldCheckmarkOutline } from "react-icons/io5";
 import SeatLayout from "./SeatLayout";
-import { Seats, Trip } from "@/types";
+import { Seats, SeatState, Trip } from "@/types";
 import { formatTime } from "@/lib/helper";
 import { useDispatch } from "react-redux";
 import { setTripData } from "@/store/tripSlice";
@@ -29,9 +29,9 @@ function SeatBooking({
   trip: Trip;
 }) {
   const dispatch = useDispatch();
-  const [selectedSeats, setSelectedSeats] = useState<string[]>([]);
+  const [selectedSeats, setSelectedSeats] = useState<number[]>([]);
   const [bookedSeats, setBookedSeats] = useState<Seats[]>([]);
-  const [seatData, setSeatData] = useState<Seats[]>([]);
+  const [seatData, setSeatData] = useState<SeatState[]>([]);
   const totalSeatsArray = trip?.vehicle?.seats;
   useEffect(() => {
     const initialBookedSeats = totalSeatsArray.filter((seat) => seat.is_booked == 2);
@@ -39,7 +39,7 @@ function SeatBooking({
   }, [trip]);
   const maxSeats = 4;
 
-  const toggleSeat = (seat: string) => {
+  const toggleSeat = (seat: number) => {
     if (selectedSeats.length < maxSeats) {
       setSelectedSeats((prev) =>
         prev.includes(seat) ? prev.filter((s) => s !== seat) : [...prev, seat]
@@ -52,19 +52,22 @@ function SeatBooking({
   };
 
   useEffect(() => {
-    const selectedSeatsData = totalSeatsArray.filter((seat) =>
-      selectedSeats.includes(seat.seat_no)
-    );
+    const selectedSeatsData = selectedSeats.map((seatId) => ({
+      id: seatId,
+    }));
     setSeatData(selectedSeatsData);
   }, [selectedSeats]);
   
+ console.log(seatData);
  
   const router = useRouter();
   const handleContinue = (trip: Trip) => {
     const getToken = localStorage.getItem("authToken");
+    const userId = localStorage.getItem("user_id");
     if (getToken) {
       dispatch(
         setTripData({
+          user_id: userId ? parseInt(userId, 10) : null,
           trip_id: trip.id,
           seat_data: seatData,
           travel_date: trip.start_date,
