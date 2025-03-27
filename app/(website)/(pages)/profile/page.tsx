@@ -7,6 +7,7 @@ import { useLogout, useFetchUser } from "@/utlis/hooks/useAuth";
 import ProfileDataSkeleton from "@/components/skeletons/ProfileDataSkeleton";
 import SettingsDataSkeleton from "@/components/skeletons/SettingsDataSkeleton";
 import { Skeleton } from "@/components/ui/skeleton";
+import UpdatePassForm from "./UpdatePassForm";
 
 const Profile = () => {
   // for fetching data
@@ -28,11 +29,6 @@ const Profile = () => {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
-  
-  const settingsData = [
-    { label: "Email", value: user ? user?.user.email : "N/A" },
-    { label: "Mobile Number", value: user ? user?.user.phone : "N/A" },
-  ];
 
   // for smooth scroll
   const profileRef = useRef<HTMLDivElement>(null);
@@ -51,7 +47,6 @@ const Profile = () => {
     window.location.href = "/login";
   };
 
-
   return (
     <div className="container py-10">
       <div className="flex flex-col md:flex-row gap-10">
@@ -67,7 +62,6 @@ const Profile = () => {
                     <span className="text-xl text-gray-600">Avatar</span>
                   </div>
                 )}
-                
               </div>
               <ul className="space-y-2 text-start">
                 <li
@@ -101,15 +95,23 @@ const Profile = () => {
                 <CardTitle className="flex justify-between items-center">
                   Profile
                   {isEditing ? (
-                  <div className="flex gap-2">
-                    <Button variant="outline" size="sm" onClick={handleSave}>Save</Button>
-                    <Button variant="outline" size="sm" onClick={handleCancel}>Cancel</Button>
-                  </div>
-                ) : (
-                  <Button variant="outline" size="sm" onClick={handleEdit}>
-                    <Pencil size={16} /> Edit
-                  </Button>
-                )}
+                    <div className="flex gap-2">
+                      <Button variant="outline" size="sm" onClick={handleSave}>
+                        Save
+                      </Button>
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        onClick={handleCancel}
+                      >
+                        Cancel
+                      </Button>
+                    </div>
+                  ) : (
+                    <Button variant="outline" size="sm" onClick={handleEdit}>
+                      <Pencil size={16} /> Edit
+                    </Button>
+                  )}
                 </CardTitle>
                 <p className="text-sm text-gray-500">
                   Basic info, for a faster booking experience
@@ -144,7 +146,9 @@ const Profile = () => {
                     <tbody>
                       {Object.entries(formData).map(([key, value], index) => (
                         <tr key={index}>
-                          <td className="font-medium text-gray-700 py-2 capitalize">{key.replace(/([A-Z])/g, " $1")}</td>
+                          <td className="font-medium text-gray-700 py-2 capitalize">
+                            {key.replace(/([A-Z])/g, " $1")}
+                          </td>
                           <td className="text-gray-500 py-2">{value}</td>
                         </tr>
                       ))}
@@ -162,30 +166,7 @@ const Profile = () => {
               </p>
             </CardHeader>
             <CardContent>
-              {isLoading ? (
-                <SettingsDataSkeleton />
-              ) : (
-                <table className="w-full table-fixed">
-                  <tbody>
-                    {settingsData.map((item, index) => (
-                      <tr key={index}>
-                        <td className="font-medium text-gray-700 py-2 capitalize">
-                          {item.label}
-                        </td>
-                        <td className="text-gray-500 py-2">{item.value}</td>
-                      </tr>
-                    ))}
-                    <tr>
-                      <td className="font-medium text-gray-700 py-2 capitalize">
-                        Password
-                      </td>
-                      <td className="py-2">
-                        <span className="text-[#020842] font-bold cursor-pointer">Change Password ?</span>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              )}
+              <UpdatePassForm user={user} isLoading={isLoading} />
             </CardContent>
           </Card>
         </div>

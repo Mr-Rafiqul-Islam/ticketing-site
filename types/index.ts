@@ -11,6 +11,10 @@ export type userData = {
   created_at: "string (datetime)";
   updated_at: "string (datetime)";
 };
+export type userResponse = {
+  message: string;
+  user: userData;
+};
 
 export type Division = {
   id: number;
