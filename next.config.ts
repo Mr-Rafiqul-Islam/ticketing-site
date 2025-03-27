@@ -4,7 +4,13 @@ const MyApi = process.env.NEXT_PUBLIC_API_URL;
 const nextConfig: NextConfig = {
   /* config options here */
   images: {
-    domains: ["touch.bytecareltd.com"],
+    remotePatterns: [
+      {
+        protocol: "https", // or "http" if the image source is not secure
+        hostname: "touch.bytecareltd.com",
+        pathname: "/**", // This allows all paths under the domain
+      },
+    ],
   },
   async rewrites() {
     return [
