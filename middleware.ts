@@ -2,35 +2,45 @@ import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 
 export function middleware(req: NextRequest) {
-  
-  console.log("Middleware triggered",req); // Log when middleware is triggered
+  console.log("Middleware triggered", req.nextUrl.pathname);
+
   const token = req.cookies.get("authToken")?.value;
-  console.log("Token from localStorage:", token); // Log the token for debugging
-  // Check if the token is present in the cookies
+  console.log("Token from cookies:", token);
 
-  // Define the paths that should be protected
   const protectedPaths = ["/booking", "/my-booking", "/profile"];
+  const authPages = ["/login", "/signup", "/forget-password", "/verify"];
+  const pathname = req.nextUrl.pathname.toLowerCase();
 
-  // Check if the request is for a protected path
   const isProtectedPath = protectedPaths.some((path) =>
-    req.nextUrl.pathname.startsWith(path)
+    pathname.startsWith(path)
   );
-  // Check if the request is for the login page
-  if (isProtectedPath && !token && req.nextUrl.pathname !== "/login") {
+  const isAuthPage = authPages.some((path) =>
+    pathname === path
+  );
+
+  if (isProtectedPath && !token) {
+    // Not logged in and trying to access protected route -> redirect to login
     return NextResponse.redirect(new URL("/login", req.url));
+  }
+
+  if (token && isAuthPage) {
+    // Logged in and trying to access auth-related pages -> redirect to home or dashboard
+    return NextResponse.redirect(new URL("/", req.url)); // Redirect to homepage or dashboard
   }
 
   return NextResponse.next();
 }
-// Define the routes where middleware should be applied
+
 export const config = {
   matcher: [
-    // Skip Next.js internals and static files
     "/((?!_next|[^?]*\\.(?:html?|css|js(?!on)|jpe?g|webp|png|gif|svg|ttf|woff2?|ico|csv|docx?|xlsx?|zip|webmanifest)).*)",
-    // Always run for API routes
     "/(api|trpc)(.*)",
     "/booking/:path*",
     "/my-booking/:path*",
     "/profile/:path*",
-  ], // Apply middleware to specific routes
+    "/login",
+    "/signup",
+    "/forget-password",
+    "/verify",
+  ],
 };
