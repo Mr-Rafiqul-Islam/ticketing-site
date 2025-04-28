@@ -30,17 +30,17 @@ export default function Trip({ from, to, date, filters }: TripProps) {
     trips = trips.filter((trip: BusTrip) => {
       // Filter Bus Type
       const busTypeMatch =
-        (filters.ac && trip.vehicle.type.name.toLowerCase() === "ac") ||
-        (filters.nonAc && trip.vehicle.type.name.toLowerCase() === "non ac") ||
-        (!filters.ac && !filters.nonAc); // if none selected, allow all
+        (filters.Ac && trip.vehicle.type.name.toLowerCase() === "ac") ||
+        (filters["Non-Ac"] && trip.vehicle.type.name === "Non-Ac") ||
+        (!filters.Ac && !filters["Non-Ac"]); // if none selected, allow all
 
       // Filter Bus Company
-      const busCompanyFilters = ["Hanif", "Ena", "greenLine", "royalCoach", "goldenLine"].filter(
-        (company) => filters[company.replace(/([A-Z])/g, " \$1").trim()]
+      const busCompanyFilters = ["Hanif", "Ena", "Green Line", "Royal Coach", "Golden Line"].filter(
+        (company) => filters[company]
       );
 
       const busCompanyMatch =
-        busCompanyFilters.length === 0 || busCompanyFilters.includes(trip.vehicle.name.toLowerCase());
+        busCompanyFilters.length === 0 || busCompanyFilters.includes(trip.vehicle.name);
 
       return busTypeMatch && busCompanyMatch;
     });

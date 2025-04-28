@@ -7,13 +7,13 @@ import SortOptions from "@/components/search/SortOptions";
 import FilterBtn from "@/components/search/FilterBtn";
 
 const filterOptions = [
-  "ac",
-  "nonAc",
+  "Ac",
+  "Non-Ac",
   "Hanif",
   "Ena",
-  "greenLine",
-  "royalCoach",
-  "goldenLine",
+  "Green Line",
+  "Royal Coach",
+  "Golden Line",
 ];
 
 interface ClientSearchResultsPageProps {

@@ -42,28 +42,28 @@ const FilterSidebar = ({
           <h5 className="uppercase text-primary-color font-semibold">Bus Type</h5>
           <p className="flex gap-2 items-center">
             <Checkbox
-              id="ac"
-              checked={filters.ac}
-              onCheckedChange={() => onCheckboxChange("ac")}
+              id="Ac"
+              checked={filters.Ac}
+              onCheckedChange={() => onCheckboxChange("Ac")}
               className="data-[state=checked]:bg-primary-color data-[state=checked]:border-primary-color"
             />
-            <Label htmlFor="ac" className="cursor-pointer">AC</Label>
+            <Label htmlFor="Ac" className="cursor-pointer">Ac</Label>
           </p>
           <p className="flex gap-2 items-center">
             <Checkbox
-              id="nonAc"
-              checked={filters.nonAc}
-              onCheckedChange={() => onCheckboxChange("nonAc")}
+              id="Non-Ac"
+              checked={filters["Non-Ac"]}
+              onCheckedChange={() => onCheckboxChange("Non-Ac")}
               className="data-[state=checked]:bg-primary-color data-[state=checked]:border-primary-color"
             />
-            <Label htmlFor="nonAc" className="cursor-pointer">Non AC</Label>
+            <Label htmlFor="Non-Ac" className="cursor-pointer">Non-Ac</Label>
           </p>
         </div>
 
         {/* Bus Company */}
         <div className="flex flex-col gap-2">
           <h5 className="uppercase text-primary-color font-semibold">Bus Company</h5>
-          {["Hanif", "Ena", "greenLine", "royalCoach", "goldenLine"].map((bus) => (
+          {["Hanif", "Ena", "Green Line", "Royal Coach", "Golden Line"].map((bus) => (
             <p key={bus} className="flex gap-2 items-center">
               <Checkbox
                 id={bus}
@@ -72,7 +72,7 @@ const FilterSidebar = ({
                 className="data-[state=checked]:bg-primary-color data-[state=checked]:border-primary-color"
               />
               <Label htmlFor={bus} className="cursor-pointer capitalize">
-                {bus.replace(/([A-Z])/g, " \$1").trim()}
+                {bus}
               </Label>
             </p>
           ))}
