@@ -281,6 +281,26 @@ export type BookingList = {
         created_at: string;
         updated_at: string;
       };
+      start_counter: {
+        id: number;
+        company_id: number;
+        name: string;
+        counter_no: string | null;
+        location_id: number;
+        status: string;
+        created_at: string;
+        updated_at: string;
+      };
+      end_counter: {
+        id: number;
+        company_id: number;
+        name: string;
+        counter_no: string | null;
+        location_id: number;
+        status: string;
+        created_at: string;
+        updated_at: string;
+      };
     };
   };
   vehicle: {
