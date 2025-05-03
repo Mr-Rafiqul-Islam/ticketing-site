@@ -231,6 +231,7 @@ export type BookingList = {
     is_registration_by: string | null;
     created_at: string;
     updated_at: string;
+    site_setting: SiteSetting;
   };
   trip: {
     id: number;
