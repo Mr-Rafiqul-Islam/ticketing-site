@@ -24,6 +24,12 @@ import { useFetchLocations } from "@/utlis/hooks/useFetchLocations";
 import { format } from "date-fns";
 import { useSearchContext } from "@/utlis/provider/SearchProvider";
 
+interface Location {
+  id: string;
+  value: string;
+  label: string;
+}
+
 interface SearchBarProps {
   initialFromId?: string;
   initialToId?: string;
@@ -43,12 +49,14 @@ function SearchBar({
   const { data, error, isLoading } = useFetchLocations();
   const locationArray = data?.locations;
 
-  // Map locations for easier lookup
-  const locations = locationArray?.map((loc: any) => ({
-    id: loc.id.toString(),
-    value: loc.name.toLowerCase().replace(/\s+/g, ""),
-    label: loc.name,
-  }));
+  // Map locations for easier lookup with explicit types
+  const locations: Location[] | undefined = locationArray?.map(
+    (loc: { id: number; name: string }) => ({
+      id: loc.id.toString(),
+      value: loc.name.toLowerCase().replace(/\s+/g, ""),
+      label: loc.name,
+    })
+  );
 
   // Local state for the strings that show in the button
   const [from, setFrom] = useState("");
@@ -59,7 +67,7 @@ function SearchBar({
   // Sync local "from" string when fromId or locations change
   useEffect(() => {
     if (locations && fromId) {
-      const loc = locations.find((loc) => loc.id === fromId);
+      const loc = locations.find((loc: Location) => loc.id === fromId);
       if (loc) setFrom(loc.value);
     }
   }, [fromId, locations]);
@@ -67,7 +75,7 @@ function SearchBar({
   // Sync local "to" string when toId or locations change
   useEffect(() => {
     if (locations && toId) {
-      const loc = locations.find((loc) => loc.id === toId);
+      const loc = locations.find((loc: Location) => loc.id === toId);
       if (loc) setTo(loc.value);
     }
   }, [toId, locations]);
@@ -76,22 +84,34 @@ function SearchBar({
   useEffect(() => {
     if ((!fromId || !toId) && locations) {
       if (initialFromId) {
-        const loc = locations.find((loc) => loc.id === initialFromId);
+        const loc = locations.find((loc: Location) => loc.id === initialFromId);
         if (loc) {
-          setData((prev) => ({ ...prev, fromId: loc.id }));
+          setData((prev: typeof searchData) => ({ ...prev, fromId: loc.id }));
         }
       }
       if (initialToId) {
-        const loc = locations.find((loc) => loc.id === initialToId);
+        const loc = locations.find((loc: Location) => loc.id === initialToId);
         if (loc) {
-          setData((prev) => ({ ...prev, toId: loc.id }));
+          setData((prev: typeof searchData) => ({ ...prev, toId: loc.id }));
         }
       }
       if (initialDate) {
-        setData((prev) => ({ ...prev, journeyDate: initialDate }));
+        setData((prev: typeof searchData) => ({
+          ...prev,
+          journeyDate: initialDate,
+        }));
       }
     }
-  }, [initialFromId, initialToId, initialDate, fromId, toId, locations, setData]);
+  }, [
+    initialFromId,
+    initialToId,
+    initialDate,
+    fromId,
+    toId,
+    locations,
+    setData,
+    searchData,
+  ]);
 
   const handleSearch = () => {
     if (!fromId || !toId || !journeyDate) {
@@ -144,7 +164,7 @@ function SearchBar({
                       <CommandList>
                         <CommandEmpty>No location found.</CommandEmpty>
                         <CommandGroup>
-                          {locations?.map((location) => (
+                          {locations?.map((location: Location) => (
                             <CommandItem
                               key={location.value}
                               onSelect={() => {
@@ -192,7 +212,7 @@ function SearchBar({
                       <CommandList>
                         <CommandEmpty>No location found.</CommandEmpty>
                         <CommandGroup>
-                          {locations?.map((location) => (
+                          {locations?.map((location: Location) => (
                             <CommandItem
                               key={location.value}
                               onSelect={() => {
