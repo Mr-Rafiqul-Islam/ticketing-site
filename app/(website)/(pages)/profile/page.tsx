@@ -79,6 +79,8 @@ const Profile = () => {
     logout();
     window.location.href = "/login";
   };
+  // Get the first letter of the user's name
+  const firstLetterOfName = user?.user?.name ? user.user.name[0].toUpperCase() : '';
 
   return (
     <div className="container py-10">
@@ -92,7 +94,9 @@ const Profile = () => {
                   <Skeleton className="h-24 w-24 rounded-full" />
                 ) : (
                   <div className="w-24 h-24 rounded-full bg-gray-200 flex items-center justify-center">
-                    <span className="text-xl text-gray-600">Avatar</span>
+                    <span className="text-5xl font-bold text-gray-600">
+                      {firstLetterOfName}
+                    </span>
                   </div>
                 )}
               </div>
