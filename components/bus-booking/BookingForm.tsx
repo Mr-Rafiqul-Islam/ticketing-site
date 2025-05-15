@@ -10,7 +10,6 @@ import { useSelector } from "react-redux";
 import { RootState } from "@/store/store";
 import { useBooking } from "@/utlis/hooks/useBooking";
 import { Bounce, toast, ToastContainer } from "react-toastify";
-import { useRouter } from "next/navigation";
 
 type BookingFormData = {
   passenger_phone: number;
@@ -18,25 +17,24 @@ type BookingFormData = {
 };
 
 export default function BookingForm() {
-  const router = useRouter();
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<BookingFormData>();
   const [gender, setGender] = useState<"male" | "female">("male");
-  const tripData = useSelector((state: RootState) => state.trip);
-  console.log(tripData);
-  const { mutate, isSuccess } = useBooking();
+  const bookingData = useSelector((state: RootState) => state.booking);
+  console.log(bookingData, "bookingData");
+  const { mutate } = useBooking();
 
   const onSubmit = (data: BookingFormData) => {
     console.log("Form Submitted:", data);
     const bookingPayload = {
       ...data,
-      user_id: tripData.user_id ?? 0, // Provide a default value or handle null
-      trip_id: tripData.trip_id ?? 0, // Provide a default value or handle null
-      seat_data: tripData.seat_data,
-      travel_date: tripData.travel_date ?? "", // Provide a default value or handle null
+      user_id: bookingData.user_id ?? 0, // Provide a default value or handle null
+      trip_id: bookingData.trip_id ?? 0, // Provide a default value or handle null
+      seat_data: bookingData.seat_data,
+      travel_date: bookingData.travel_date ?? "", // Provide a default value or handle null
     };
     console.log(bookingPayload);
     mutate(bookingPayload, {
