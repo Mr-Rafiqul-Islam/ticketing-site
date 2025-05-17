@@ -1,17 +1,16 @@
 import ClientSearchResultsPage from "./ClientSearchResultsPage";
 
-interface SearchPageProps {
-  params: {
-    from: string;
-    to: string;
-    date: string;
-  };
-}
 
-export default async function SearchResultsPage({ params }: SearchPageProps) {
-  const { from, to, date } = await params;
+export type SearchPageProps = Promise<{
+  from: string;
+  to: string;
+  date: string;
+}>;
 
-  return (
-    <ClientSearchResultsPage from={from} to={to} date={date} />
-  );
+export default async function SearchResultsPage(props: {
+  params: SearchPageProps;
+}) {
+  const { from, to, date } = await props.params;
+
+  return <ClientSearchResultsPage from={from} to={to} date={date} />;
 }
