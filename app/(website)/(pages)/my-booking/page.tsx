@@ -8,7 +8,7 @@ import { formatTime, formatDate } from "@/lib/helper";
 import { cn } from "@/lib/utils";
 import { BookingList } from "@/types";
 import { useMyBooking } from "@/utlis/hooks/useFetchLocations";
-import { PDFDownloadLink, pdf } from "@react-pdf/renderer";
+import { PDFDownloadLink } from "@react-pdf/renderer";
 import Image from "next/image";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
@@ -49,7 +49,27 @@ const MyBooking = () => {
     });
   };
 
-  
+  // Filter the booking list based on activeTab and year filters
+  const filteredBookings = bookingList.filter((item) => {
+    // Filter by active tab "all" or "pending"
+    if (activeTab === "pending") {
+      // Adjust this condition based on how you define "pending"
+      if (item.status !== "pending") {
+        return false;
+      }
+    }
+
+    // If no filters checked, include all
+    if (!isAnyFilterChecked) {
+      return true;
+    }
+
+    // Extract year from trip start_date (assuming ISO format)
+    const bookingYear = new Date(item?.trip?.start_date).getFullYear().toString();
+
+    // Include booking if its year is one of the checked filters
+    return filters[bookingYear as keyof typeof filters];
+  });
 
   return (
     <div className="container py-10">
@@ -109,7 +129,7 @@ const MyBooking = () => {
                       className="data-[state=checked]:bg-primary-color data-[state=checked]:border-primary-color"
                     />
                     <Label htmlFor={year} className="cursor-pointer capitalize">
-                      {year.replace(/([A-Z])/g, " $1").trim()}
+                      {year.replace(/([A-Z])/g, " \$1").trim()}
                     </Label>
                   </p>
                 ))}
@@ -129,9 +149,9 @@ const MyBooking = () => {
                     </>
                   ) : (
                     <div>
-                      {bookingList?.length > 0 ? (
+                      {filteredBookings.length > 0 ? (
                         <div>
-                          {bookingList.map((item) => (
+                          {filteredBookings.map((item) => (
                             <div key={item.id} className="border-b mb-2 ">
                               <h2 className="text-xl text-primary-color font-bold">
                                 {item.company?.name}
@@ -184,9 +204,7 @@ const MyBooking = () => {
                                     document={<TicketPdf booking={item} />}
                                     fileName={`${item?.passenger_name}-ticket.pdf`}
                                   >
-                                    {({ loading }) =>
-                                      loading ? "Loading..." : "Download Ticket"
-                                    }
+                                    Download Ticket
                                   </PDFDownloadLink>
                                 </Button>
                               </div>
