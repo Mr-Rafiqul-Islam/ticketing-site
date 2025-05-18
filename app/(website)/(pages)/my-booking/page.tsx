@@ -44,8 +44,7 @@ const MyBooking = () => {
 
   const handleReset = () => {
     setFilters({
-      2025: false,
-      2024: false,
+      ...initialFilters,
     });
   };
 
