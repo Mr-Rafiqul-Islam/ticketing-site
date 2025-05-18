@@ -11,7 +11,7 @@ import { useMyBooking } from "@/utlis/hooks/useFetchLocations";
 import { PDFDownloadLink } from "@react-pdf/renderer";
 import Image from "next/image";
 import Link from "next/link";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { TicketPdf } from "./TicketPdf";
 
 const MyBooking = () => {
@@ -49,26 +49,22 @@ const MyBooking = () => {
   };
 
   // Filter the booking list based on activeTab and year filters
-  const filteredBookings = bookingList.filter((item) => {
-    // Filter by active tab "all" or "pending"
-    if (activeTab === "pending") {
-      // Adjust this condition based on how you define "pending"
-      if (item.status !== "pending") {
-        return false;
-      }
-    }
+  const filteredBookings = useMemo(() => {
+  let filtered = [...bookingList];
 
-    // If no filters checked, include all
-    if (!isAnyFilterChecked) {
-      return true;
-    }
+  // if (activeTab === "pending") {
+  //   filtered = filtered.filter((item) => item.status === "pending");
+  // }
 
-    // Extract year from trip start_date (assuming ISO format)
-    const bookingYear = new Date(item?.trip?.start_date).getFullYear().toString();
+  if (isAnyFilterChecked) {
+    filtered = filtered.filter((item) => {
+      const bookingYear = new Date(item?.trip?.start_date).getFullYear().toString();
+      return filters[bookingYear as keyof typeof filters];
+    });
+  }
 
-    // Include booking if its year is one of the checked filters
-    return filters[bookingYear as keyof typeof filters];
-  });
+  return filtered;
+}, [bookingList, activeTab, filters]);
 
   return (
     <div className="container py-10">
