@@ -1,21 +1,38 @@
 // Helper functions for formatting and manipulating data
 
-export const formatTime = (timeString: string) => {
+export const formatTime = (timeString?: string) => {
+  if (!timeString || !timeString.includes(":")) return "N/A";
   const [hours, minutes] = timeString.split(":").map(Number);
-  return new Intl.DateTimeFormat("en-US", {
-    hour: "2-digit",
-    minute: "2-digit",
-    hour12: true,
-  }).format(new Date(0, 0, 0, hours, minutes));
+  if (isNaN(hours) || isNaN(minutes)) return "N/A";
+
+  try {
+    return new Intl.DateTimeFormat("en-US", {
+      hour: "2-digit",
+      minute: "2-digit",
+      hour12: true,
+    }).format(new Date(0, 0, 0, hours, minutes));
+  } catch (e) {
+    return "N/A";
+  }
 };
 
-export const formatDate = (dateString: string) => {
-  return new Intl.DateTimeFormat("en-GB", {
-    day: "2-digit",
-    month: "short",
-    year: "numeric",
-  }).format(new Date(dateString));
+
+export const formatDate = (dateString?: string) => {
+  if (!dateString) return "N/A";
+  const date = new Date(dateString);
+  if (isNaN(date.getTime())) return "N/A";
+
+  try {
+    return new Intl.DateTimeFormat("en-GB", {
+      day: "2-digit",
+      month: "short",
+      year: "numeric",
+    }).format(date);
+  } catch (e) {
+    return "N/A";
+  }
 };
+
 export const formatBDT = (amount?: string) => {
   if (!amount) return "0";
   return parseFloat(amount).toLocaleString();

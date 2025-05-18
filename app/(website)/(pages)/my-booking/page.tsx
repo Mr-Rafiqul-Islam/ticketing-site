@@ -64,7 +64,7 @@ const MyBooking = () => {
   }
 
   return filtered;
-}, [bookingList, activeTab, filters]);
+}, [bookingList, isAnyFilterChecked, filters]);
 
   return (
     <div className="container py-10">

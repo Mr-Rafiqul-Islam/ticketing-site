@@ -81,37 +81,37 @@ function SearchBar({
   }, [toId, locations]);
 
   // On mount, if initial props given and context empty, initialize context state
-  useEffect(() => {
-    if ((!fromId || !toId) && locations) {
-      if (initialFromId) {
-        const loc = locations.find((loc: Location) => loc.id === initialFromId);
-        if (loc) {
-          setData((prev: typeof searchData) => ({ ...prev, fromId: loc.id }));
-        }
-      }
-      if (initialToId) {
-        const loc = locations.find((loc: Location) => loc.id === initialToId);
-        if (loc) {
-          setData((prev: typeof searchData) => ({ ...prev, toId: loc.id }));
-        }
-      }
-      if (initialDate) {
-        setData((prev: typeof searchData) => ({
-          ...prev,
-          journeyDate: initialDate,
-        }));
-      }
-    }
-  }, [
-    initialFromId,
-    initialToId,
-    initialDate,
-    fromId,
-    toId,
-    locations,
-    setData,
-    searchData,
-  ]);
+  // useEffect(() => {
+  //   if ((!fromId || !toId) && locations) {
+  //     if (initialFromId) {
+  //       const loc = locations.find((loc: Location) => loc.id === initialFromId);
+  //       if (loc) {
+  //         setData((prev: typeof searchData) => ({ ...prev, fromId: loc.id }));
+  //       }
+  //     }
+  //     if (initialToId) {
+  //       const loc = locations.find((loc: Location) => loc.id === initialToId);
+  //       if (loc) {
+  //         setData((prev: typeof searchData) => ({ ...prev, toId: loc.id }));
+  //       }
+  //     }
+  //     if (initialDate) {
+  //       setData((prev: typeof searchData) => ({
+  //         ...prev,
+  //         journeyDate: initialDate,
+  //       }));
+  //     }
+  //   }
+  // }, [
+  //   initialFromId,
+  //   initialToId,
+  //   initialDate,
+  //   fromId,
+  //   toId,
+  //   locations,
+  //   setData,
+  //   searchData,
+  // ]);
 
   const handleSearch = () => {
     if (!fromId || !toId || !journeyDate) {

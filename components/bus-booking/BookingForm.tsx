@@ -155,49 +155,65 @@ export default function BookingForm() {
       <div className="lg:col-span-1 w-full">
         <Card className="h-full">
           <CardHeader>
-            <CardTitle className="text-center lg:text-start">Trip Information</CardTitle>
+            <CardTitle className="text-center lg:text-start">
+              Trip Information
+            </CardTitle>
           </CardHeader>
           <CardContent>
             <div className="space-y-2">
-              <p className="font-semibold text-xl lg:text-start text-center">{tripData?.vehicle}</p>
+              <p className="font-semibold text-xl lg:text-start text-center">
+                {tripData?.vehicle}
+              </p>
               <div className="flex items-center justify-between">
-                <p className="text-xl font-bold text-primary-color">{`${
-                  tripData?.price
-                } x${bookingData?.seat_data.length} = ${
-                  tripData?.price * bookingData?.seat_data.length
-                }`}</p>
-                {/* <p>
-                  Seat: <span className="font-semibold">A2</span>
-                </p> */}
-                
-                  <div className="flex gap-2 my-2">
-                                <strong>Seat :</strong>
-                                <span className="flex gap-2">
-                                  {tripData?.selected_seats
-                                    ?.toSorted((a, b) => a.id - b.id)
-                                    .map((seat) => (
-                                      <p key={seat.seat_no}>{seat.seat_no},</p>
-                                    ))}
-                                </span>
-                              </div>
-               
+                <p className="text-base font-bold text-primary-color">
+                  {`${tripData?.price} x${bookingData?.seat_data.length}`} =
+                  {`${Number(tripData?.price) * bookingData?.seat_data.length}`}
+                  BDT
+                </p>
+                <div className="flex gap-2 my-2">
+                  <strong>Seat :</strong>
+                  <span className="flex gap-2">
+                    {tripData?.selected_seats
+                      ?.toSorted((a, b) => a.id - b.id)
+                      .map((seat) => (
+                        <p key={seat.seat_no}>{seat.seat_no},</p>
+                      ))}
+                  </span>
+                </div>
               </div>
               <div className="grid grid-cols-6 gap-2 place-items-center">
-                <div className="col-span-2 text-sm">
-                  Departure:{" "}
-                  <p className="font-semibold">{tripData?.from}</p>
-                  <p className="font-semibold">{formatDate(tripData.start_date)}</p>
-                  <p className="font-semibold">{formatTime(tripData.start_time)}</p>
-                </div>
+                {tripData?.start_date && tripData?.start_time ? (
+                  <div className="col-span-2 text-sm">
+                    Departure: <p className="font-semibold">{tripData?.from}</p>
+                    <p className="font-semibold">
+                      {formatDate(tripData.start_date)}
+                    </p>
+                    <p className="font-semibold">
+                      {formatTime(tripData.start_time)}
+                    </p>
+                  </div>
+                ) : (
+                  <p className="col-span-2 text-red-500 text-sm text-center">
+                    Trip data not available.
+                  </p>
+                )}
+
                 <p className="col-span-2 justify-center flex text-gray-500">
                   ----------------
                 </p>
-                <div className="col-span-2 text-sm">
-                  Arrival:{" "}
-                  <p className="font-semibold">{tripData?.to}</p>
-                  <p className="font-semibold">{formatDate(tripData.end_date)}</p>
-                  <p className="font-semibold">{formatTime(tripData.end_time)}</p>
-                </div>
+                {tripData?.start_date && tripData?.start_time ? (
+                  <div className="col-span-2 text-sm">
+                    Arrival: <p className="font-semibold">{tripData?.to}</p>
+                    <p className="font-semibold">
+                      {formatDate(tripData.end_date)}
+                    </p>
+                    <p className="font-semibold">
+                      {formatTime(tripData.end_time)}
+                    </p>
+                  </div>
+                ) : (
+                  <p className="col-span-2 text-red-500 text-sm text-center">Trip data not available.</p>
+                )}
               </div>
             </div>
           </CardContent>
