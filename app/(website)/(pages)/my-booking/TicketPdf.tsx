@@ -194,7 +194,7 @@ export const TicketPdf: React.FC<TicketPdfProps> = ({ booking }) => {
     (acc, s) => acc + parseFloat(s.seatPrice),
     0
   );
-  console.log(`${baseurl}/${company?.site_setting?.logo}`);
+  
   return (
     <Document>
       <Page size="A4" style={styles.page}>

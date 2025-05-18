@@ -28,7 +28,7 @@ export default function Trip({ from, to, date, filters, sortBy }: TripProps) {
   const trips = useMemo(() => {
     if (!data?.trips) return [];
 
-    let filtered = data.trips.filter((trip: BusTrip) => {
+    const filtered = data.trips.filter((trip: BusTrip) => {
       // Filter Bus Type
       const type = trip.vehicle.type.name.toLowerCase();
       const isAc = filters.Ac && type === "ac";
