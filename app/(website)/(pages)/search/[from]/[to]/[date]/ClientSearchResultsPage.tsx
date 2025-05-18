@@ -42,6 +42,9 @@ useEffect(() => {
     filterOptions.map((option) => [option, false])
   );
   const [filters, setFilters] = useState(initialFilters);
+  // Add this inside your component
+  const [sortBy, setSortBy] = useState<"lowest" | "highest">("lowest");
+
 
   const handleCheckboxChange = (id: keyof typeof initialFilters) => {
     setFilters((prev) => ({
@@ -69,7 +72,7 @@ useEffect(() => {
             />
             <main className="flex-1 lg:p-4">
               <div className="flex justify-between">
-                <SortOptions />
+                <SortOptions sortBy={sortBy} onChange={setSortBy} />
                 <div className="flex lg:hidden text-xs">
                   <FilterBtn
                     filters={filters}
@@ -78,7 +81,7 @@ useEffect(() => {
                   />
                 </div>
               </div>
-              <Trip from={from} to={to} date={date} filters={filters} />
+              <Trip from={from} to={to} date={date} filters={filters} sortBy={sortBy}/>
             </main>
           </div>
         </div>
