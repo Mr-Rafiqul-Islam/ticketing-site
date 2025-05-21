@@ -30,23 +30,19 @@ interface Location {
   label: string;
 }
 
-interface SearchBarProps {
-  initialFromId?: string;
-  initialToId?: string;
-  initialDate?: Date;
-}
+// interface SearchBarProps {
+//   initialFromId?: string;
+//   initialToId?: string;
+//   initialDate?: Date;
+// }
 
-function SearchBar({
-  initialFromId = "",
-  initialToId = "",
-  initialDate,
-}: SearchBarProps) {
+function SearchBar() {
   const router = useRouter();
   const { data: searchData, setData } = useSearchContext();
 
   const { fromId, toId, journeyDate } = searchData;
 
-  const { data, error, isLoading } = useFetchLocations();
+  const { data } = useFetchLocations();
   const locationArray = data?.locations;
 
   // Map locations for easier lookup with explicit types

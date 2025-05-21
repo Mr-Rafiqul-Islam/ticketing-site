@@ -26,10 +26,9 @@ function UpdatePassForm({
   const {
     register,
     handleSubmit,
-    formState: { errors },
   } = useForm<UpdateFormValues>();
   const [passEditing, setPassEditing] = useState(false);
-  const { mutate, status, error } = useUpdatePassword();
+  const { mutate } = useUpdatePassword();
 
   const onSubmit = (data: UpdateFormValues) => {
     

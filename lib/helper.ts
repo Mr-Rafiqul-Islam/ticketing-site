@@ -11,7 +11,7 @@ export const formatTime = (timeString?: string) => {
       minute: "2-digit",
       hour12: true,
     }).format(new Date(0, 0, 0, hours, minutes));
-  } catch (e) {
+  } catch {
     return "N/A";
   }
 };
@@ -28,7 +28,7 @@ export const formatDate = (dateString?: string) => {
       month: "short",
       year: "numeric",
     }).format(date);
-  } catch (e) {
+  } catch {
     return "N/A";
   }
 };

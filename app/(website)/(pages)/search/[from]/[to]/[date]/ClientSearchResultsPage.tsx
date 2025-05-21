@@ -59,9 +59,7 @@ useEffect(() => {
 
   return (
     <div className="font-[family-name:var(--font-geist-sans)]">
-      <SearchBar initialFromId={from}
-        initialToId={to}
-        initialDate={new Date(date)}/>
+      <SearchBar />
       <section className="py-1">
         <div className="search-container min-h-[450px]">
           <div className="flex">

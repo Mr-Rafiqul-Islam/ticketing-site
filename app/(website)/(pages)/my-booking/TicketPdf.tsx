@@ -183,9 +183,9 @@ interface TicketPdfProps {
 }
 
 export const TicketPdf: React.FC<TicketPdfProps> = ({ booking }) => {
-  const { seat_data, passenger_name, passenger_phone, company, vehicle, trip } =
+  const { seat_data, passenger_name, passenger_phone, vehicle, trip } =
     booking;
-    const baseurl= process.env.NEXT_PUBLIC_API_URL
+    
   const backgroundImage = "./city_bus_bro1.png"; // Update as needed
 
   const seatsCount = seat_data.length;

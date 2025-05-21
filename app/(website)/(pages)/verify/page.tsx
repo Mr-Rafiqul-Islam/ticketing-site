@@ -17,7 +17,7 @@ const Verify = () => {
     handleSubmit,
     formState: { errors },
   } = useForm<VerifyFormValues>();
-  const { mutate, status, error } = useVerify();
+  const { mutate, error } = useVerify();
 
   const onSubmit = (data: VerifyFormValues) => {
     

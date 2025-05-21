@@ -12,13 +12,13 @@ import logo from "@/public/logo.png";
 import logobg from "@/public/logo-with-bg.png";
 import Link from "next/link";
 import Image from "next/image";
-import { useFetchUser, useLogout } from "@/utlis/hooks/useAuth";
+import { useFetchUser } from "@/utlis/hooks/useAuth";
 import { cn } from "@/lib/utils";
 import User from "./User";
 import { FaBars } from "react-icons/fa6";
 
 function Header() {
-  const { data: user, isLoading, refetch } = useFetchUser();
+  const { data: user,  refetch } = useFetchUser();
   
 
   useEffect(() => {
