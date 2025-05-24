@@ -86,7 +86,7 @@ function SearchBar() {
       <div className="container">
         <div className="max-w-5xl mx-auto">
           <p className="text-gray-500 text-sm mb-4">
-            Test: Please try to search for Dhaka To Cox's Bazar on 30th of current month
+            Test: Please try to search for Dhaka To Cox&apos;s Bazar on 30th of current month
           </p>
 
           <div className="flex flex-col p-2 bg-white gap-4 xl:flex-row xl:py-4 rounded-lg xl:items-center xl:justify-around max-w-5xl mx-auto">
