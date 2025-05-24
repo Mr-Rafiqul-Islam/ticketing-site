@@ -2,7 +2,6 @@
 import React, { useEffect, useState } from "react";
 import { DatePicker } from "./ui/datepicker";
 import { Label } from "@/components/ui/label";
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Button } from "@/components/ui/button";
 import {
   Command,
@@ -30,19 +29,19 @@ interface Location {
   label: string;
 }
 
-// interface SearchBarProps {
-//   initialFromId?: string;
-//   initialToId?: string;
-//   initialDate?: Date;
-// }
-
 function SearchBar() {
+  // Local state for the strings that show in the button
+  const [from, setFrom] = useState("");
+  const [to, setTo] = useState("");
   const router = useRouter();
   const { data: searchData, setData } = useSearchContext();
-
+  
   const { fromId, toId, journeyDate } = searchData;
-
+  
   const { data } = useFetchLocations();
+  
+  
+  
   const locationArray = data?.locations;
 
   // Map locations for easier lookup with explicit types
@@ -54,11 +53,8 @@ function SearchBar() {
     })
   );
 
-  // Local state for the strings that show in the button
-  const [from, setFrom] = useState("");
-  const [to, setTo] = useState("");
-  const [tripType, setTripType] = useState("oneWay");
-  const [returnDate, setReturnDate] = useState<Date | undefined>();
+
+
 
   // Sync local "from" string when fromId or locations change
   useEffect(() => {
@@ -76,39 +72,6 @@ function SearchBar() {
     }
   }, [toId, locations]);
 
-  // On mount, if initial props given and context empty, initialize context state
-  // useEffect(() => {
-  //   if ((!fromId || !toId) && locations) {
-  //     if (initialFromId) {
-  //       const loc = locations.find((loc: Location) => loc.id === initialFromId);
-  //       if (loc) {
-  //         setData((prev: typeof searchData) => ({ ...prev, fromId: loc.id }));
-  //       }
-  //     }
-  //     if (initialToId) {
-  //       const loc = locations.find((loc: Location) => loc.id === initialToId);
-  //       if (loc) {
-  //         setData((prev: typeof searchData) => ({ ...prev, toId: loc.id }));
-  //       }
-  //     }
-  //     if (initialDate) {
-  //       setData((prev: typeof searchData) => ({
-  //         ...prev,
-  //         journeyDate: initialDate,
-  //       }));
-  //     }
-  //   }
-  // }, [
-  //   initialFromId,
-  //   initialToId,
-  //   initialDate,
-  //   fromId,
-  //   toId,
-  //   locations,
-  //   setData,
-  //   searchData,
-  // ]);
-
   const handleSearch = () => {
     if (!fromId || !toId || !journeyDate) {
       alert("Please fill in all required fields!");
@@ -122,22 +85,12 @@ function SearchBar() {
     <section className="bg-slate-200 py-5">
       <div className="container">
         <div className="max-w-5xl mx-auto">
-          <RadioGroup
-            className="flex gap-4 mb-4"
-            value={tripType}
-            onValueChange={setTripType}
-          >
-            <div className="flex items-center space-x-2">
-              <RadioGroupItem value="oneWay" id="oneWay" />
-              <Label htmlFor="oneWay">One Way</Label>
-            </div>
-            <div className="flex items-center space-x-2">
-              <RadioGroupItem value="roundWay" id="roundWay" />
-              <Label htmlFor="roundWay">Round Way</Label>
-            </div>
-          </RadioGroup>
+          <p className="text-gray-500 text-sm mb-4">
+            Test: Please try to search for Dhaka To Cox's Bazar on 30th of current month
+          </p>
+
           <div className="flex flex-col p-2 bg-white gap-4 xl:flex-row xl:py-4 rounded-lg xl:items-center xl:justify-around max-w-5xl mx-auto">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               {/* From */}
               <div>
                 <Label>From</Label>
@@ -234,30 +187,18 @@ function SearchBar() {
                   </PopoverContent>
                 </Popover>
               </div>
-            </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {/* Journey Date */}
               <div>
                 <Label>Journey Date</Label>
                 <DatePicker
                   selected={journeyDate}
-                  onSelect={(date) => setData({ ...searchData, journeyDate: date })}
+                  onSelect={(date) =>
+                    setData({ ...searchData, journeyDate: date })
+                  }
                   placeholder="Pick A Date"
                   className="w-full"
                 />
               </div>
-              {/* Return Date only if round trip */}
-              {tripType !== "oneWay" && (
-                <div>
-                  <Label>Return Date</Label>
-                  <DatePicker
-                    selected={returnDate}
-                    onSelect={setReturnDate}
-                    placeholder="Pick A Date"
-                    className="w-full"
-                  />
-                </div>
-              )}
             </div>
             <div className="flex flex-col gap-2 mt-4">
               <button
