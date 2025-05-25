@@ -231,7 +231,7 @@ function SeatBooking({
                 <p className="text-lg font-bold">
                   Total: ৳{trip?.ticket_price}
                 </p>
-                <button className="bg-primary-color text-white p-3 w-full rounded mt-2" onClick={() => handleContinue(trip)}>
+                <button className="bg-primary-color text-white p-3 w-full rounded mt-2 disabled:opacity-50 disabled:cursor-not-allowed" disabled={selectedSeats.length === 0} onClick={() => handleContinue(trip)}>
                   Continue
                 </button>
               </div>
