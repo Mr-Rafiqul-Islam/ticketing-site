@@ -104,7 +104,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     marginBottom: 5,
     alignItems: "center",
-    gap: '5px',
+    gap: "5px",
   },
   label: {
     fontWeight: 600,
@@ -183,18 +183,14 @@ interface TicketPdfProps {
 }
 
 export const TicketPdf: React.FC<TicketPdfProps> = ({ booking }) => {
-  const { seat_data, passenger_name, passenger_phone, vehicle, trip } =
-    booking;
-    
+  const { seat_data, passenger_name, passenger_phone, vehicle, trip } = booking;
+
   const backgroundImage = "./city_bus_bro1.png"; // Update as needed
 
   const seatsCount = seat_data.length;
-  const firstSeatPrice = parseFloat(seat_data[0]?.seatPrice || "0");
-  const totalPrice = seat_data.reduce(
-    (acc, s) => acc + parseFloat(s.seatPrice),
-    0
-  );
-  
+  const firstSeatPrice = parseFloat(trip?.ticket_price || "0");
+  const totalPrice = (Number(trip?.ticket_price) || 0) * (seat_data?.length || 0);
+
   return (
     <Document>
       <Page size="A4" style={styles.page}>
@@ -241,8 +237,8 @@ export const TicketPdf: React.FC<TicketPdfProps> = ({ booking }) => {
                     <View style={styles.row}>
                       <Text style={styles.label}>To: </Text>
                       <Text style={styles.value}>
-                      {trip?.route?.end_counter?.name},{" "}
-                      {trip?.route?.to_location?.name}
+                        {trip?.route?.end_counter?.name},{" "}
+                        {trip?.route?.to_location?.name}
                       </Text>
                     </View>
                     <View style={styles.row}>
@@ -314,7 +310,9 @@ export const TicketPdf: React.FC<TicketPdfProps> = ({ booking }) => {
                     </View>
                     <View style={styles.row}>
                       <Text style={styles.label2}>Phone: </Text>
-                      <Text style={styles.value2}>{passenger_phone || "N/A"}</Text>
+                      <Text style={styles.value2}>
+                        {passenger_phone || "N/A"}
+                      </Text>
                     </View>
                     <View style={styles.row}>
                       <Text style={styles.label2}>Coach: </Text>
@@ -325,15 +323,15 @@ export const TicketPdf: React.FC<TicketPdfProps> = ({ booking }) => {
                     <View style={styles.row}>
                       <Text style={styles.label2}>From: </Text>
                       <Text style={styles.value2}>
-                      {trip?.route?.start_counter?.name},{" "}
-                      {trip?.route?.from_location?.name}
+                        {trip?.route?.start_counter?.name},{" "}
+                        {trip?.route?.from_location?.name}
                       </Text>
                     </View>
                     <View style={styles.row}>
                       <Text style={styles.label2}>To: </Text>
                       <Text style={styles.value2}>
-                      {trip?.route?.end_counter?.name},{" "}
-                      {trip?.route?.to_location?.name}
+                        {trip?.route?.end_counter?.name},{" "}
+                        {trip?.route?.to_location?.name}
                       </Text>
                     </View>
                     <View style={styles.row}>
